@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.xowl.satellites.eclipse</groupId>
+        <artifactId>xowl-eclipse-top</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>org.xowl.satellites.eclipse.feature</artifactId>
+    <packaging>eclipse-feature</packaging>
+    <version>0.1.0-SNAPSHOT</version>
+    <name>xOWL Eclipse Satellite Feature</name>
+    <description>Feature for the xOWL satellites bundles on the Eclipse platform.</description>
+    <dependencies>
+        <dependency>
+            <groupId>fr.cenotelie.hime</groupId>
+            <artifactId>hime-redist</artifactId>
+            <version>3.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.xowl.infra</groupId>
+            <artifactId>xowl-commons</artifactId>
+            <version>${xowlInfraVersion}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.xowl.infra</groupId>
+            <artifactId>xowl-lang</artifactId>
+            <version>${xowlInfraVersion}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.xowl.infra</groupId>
+            <artifactId>xowl-store</artifactId>
+            <version>${xowlInfraVersion}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.xowl.infra</groupId>
+            <artifactId>xowl-denotation</artifactId>
+            <version>${xowlInfraVersion}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.xowl.infra</groupId>
+            <artifactId>xowl-server-api</artifactId>
+            <version>${xowlInfraVersion}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.xowl.platform</groupId>
+            <artifactId>xowl-kernel</artifactId>
+            <version>${xowlPlatformVersion}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>

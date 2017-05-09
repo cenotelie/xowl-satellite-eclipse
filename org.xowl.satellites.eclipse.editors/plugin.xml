@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.xowl.satellites.eclipse.editors.HimeGrammarEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="gram"
+            icon="resources/icons/hime-16.png"
+            id="org.xowl.satellites.eclipse.editors.HimeGrammarEditor"
+            name="Hime Grammar Editor">
+      </editor>
+      <editor
+            class="org.xowl.satellites.eclipse.editors.NTriplesEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="nt"
+            icon="resources/icons/xowl-16.png"
+            id="org.xowl.satellites.eclipse.editors.NTriplesEditor"
+            name="N-Triples Editor">
+      </editor>
+      <editor
+            class="org.xowl.satellites.eclipse.editors.NTriplesEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="nq"
+            icon="resources/icons/xowl-16.png"
+            id="org.xowl.satellites.eclipse.editors.NQuadsEditor"
+            name="N-Quads Editor">
+      </editor>
+      <editor
+            class="org.xowl.satellites.eclipse.editors.TurtleEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="ttl"
+            icon="resources/icons/xowl-16.png"
+            id="org.xowl.satellites.eclipse.editors.TurtleEditor"
+            name="Turtle Editor">
+      </editor>
+      <editor
+            class="org.xowl.satellites.eclipse.editors.TriGEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="trig"
+            icon="resources/icons/xowl-16.png"
+            id="org.xowl.satellites.eclipse.editors.TriGEditor"
+            name="TriG Editor">
+      </editor>
+      <editor
+            class="org.xowl.satellites.eclipse.editors.FunctionalOWL2Editor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="fs"
+            icon="resources/icons/xowl-16.png"
+            id="org.xowl.satellites.eclipse.editors.FunctionalOWL2Editor"
+            name="Functional OWL2 Editor">
+      </editor>
+      <editor
+            class="org.xowl.satellites.eclipse.editors.xRDFEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="xrdf"
+            icon="resources/icons/xowl-16.png"
+            id="org.xowl.satellites.eclipse.editors.xRDFEditor"
+            name="xRDF Editor">
+      </editor>
+      <editor
+            class="org.xowl.satellites.eclipse.editors.SPARQLEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="sparql"
+            icon="resources/icons/xowl-16.png"
+            id="org.xowl.satellites.eclipse.editors.SPARQLEditor"
+            name="SPARQL Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.xowl.satellites.eclipse.wizards"
+            name="xOWL">
+      </category>
+      <wizard
+            category="org.xowl.satellites.eclipse.wizards"
+            class="org.xowl.satellites.eclipse.editors.HimeGrammarNewWizard"
+            icon="resources/icons/hime-16.png"
+            id="org.xowl.satellites.eclipse.editors.HimeGramamrNewWizard"
+            name="Hime Grammar">
+      </wizard>
+   </extension>
+</plugin>

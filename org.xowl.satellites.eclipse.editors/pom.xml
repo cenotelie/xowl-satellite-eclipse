@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.xowl.satellites.eclipse</groupId>
+        <artifactId>xowl-eclipse-top</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>org.xowl.satellites.eclipse.editors</artifactId>
+    <packaging>eclipse-plugin</packaging>
+    <version>0.1.0-SNAPSHOT</version>
+    <name>xOWL Eclipse Satellite - Editors</name>
+    <description>Editors for various semantic web textual syntaxes.</description>
+    <dependencies>
+        <dependency>
+            <groupId>org.xowl.infra</groupId>
+            <artifactId>xowl-store</artifactId>
+            <version>${xowlInfraVersion}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>
