@@ -67,6 +67,14 @@
             id="org.xowl.satellites.eclipse.editors.SPARQLEditor"
             name="SPARQL Editor">
       </editor>
+      <editor
+            class="org.xowl.satellites.eclipse.editors.DenotationEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="denotation"
+            icon="resources/icons/xowl-16.png"
+            id="org.xowl.satellites.eclipse.editors.DenotationEditor"
+            name="Denotation Editor">
+      </editor>
    </extension>
    <extension
          point="org.eclipse.ui.newWizards">
