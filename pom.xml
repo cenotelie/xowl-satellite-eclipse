@@ -54,6 +54,7 @@
         <module>org.xowl.satellites.eclipse.denotation</module>
         <module>org.xowl.satellites.eclipse.editors</module>
         <module>org.xowl.satellites.eclipse.feature</module>
+        <module>org.xowl.satellites.eclipse.updatesite</module>
     </modules>
     <build>
         <plugins>
