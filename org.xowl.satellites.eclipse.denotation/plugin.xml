@@ -1,4 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               icon="platform:/plugin/org.xowl.satellites.eclipse.editors/resources/icons/xowl-16.png"
+               id="org.xowl.satellites.eclipse.menu"
+               label="xOWL">
+            <menu
+                  id="org.xowl.satellites.eclipse.menu.denotation"
+                  label="Denotation">
+               <command
+                     commandId="org.xowl.satellites.eclipse.denotation.CommandCaptureDenotation"
+                     label="Capture Denotation"
+                     style="push">
+                  <visibleWhen
+                        checkEnabled="false">
+                     <with
+                           variable="selection">
+                        <test
+                              forcePluginActivation="true"
+                              property="org.xowl.satellites.eclipse.denotation.properties.IsGmfNotationElement">
+                        </test>
+                     </with>
+                  </visibleWhen>
+               </command>
+            </menu>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="org.xowl.satellites.eclipse.denotation.DenotationPropertyTester"
+            id="org.xowl.satellites.eclipse.denotation.PropertyTester"
+            namespace="org.xowl.satellites.eclipse.denotation.properties"
+            properties="IsGmfNotationElement"
+            type="org.eclipse.jface.viewers.IStructuredSelection">
+      </propertyTester>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.xowl.satellites.eclipse.denotation.CommandCategory"
+            defaultHandler="org.xowl.satellites.eclipse.denotation.CommandCaptureDenotationHandler"
+            id="org.xowl.satellites.eclipse.denotation.CommandCaptureDenotation"
+            name="Capture Denotation">
+      </command>
+      <category
+            id="org.xowl.satellites.eclipse.denotation.CommandCategory"
+            name="Denotation Command">
+      </category>
+   </extension>
 </plugin>

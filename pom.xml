@@ -49,6 +49,16 @@
             <layout>p2</layout>
             <url>http://download.eclipse.org/eclipse/updates/4.6/R-4.6.3-201703010400/</url>
         </repository>
+        <repository>
+            <id>gef</id>
+            <layout>p2</layout>
+            <url>http://download.eclipse.org/tools/gef/updates/releases-pre-composite/</url>
+        </repository>
+        <repository>
+            <id>gmf-runtime</id>
+            <layout>p2</layout>
+            <url>http://download.eclipse.org/modeling/gmp/gmf-notation/updates/releases/</url>
+        </repository>
     </repositories>
     <modules>
         <module>org.xowl.satellites.eclipse.denotation</module>
