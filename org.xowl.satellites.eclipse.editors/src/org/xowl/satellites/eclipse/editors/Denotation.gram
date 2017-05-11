@@ -121,7 +121,7 @@ grammar Denotation
         sign_pattern_property   -> WITH! iri (OP_EQ | OP_NEQ) sign_property_value ;
         sign_pattern_relations  -> sign_pattern_relation* ;
         sign_pattern_relation   -> RELATION! iri (VARIABLE | iri) ;
-        sign_pattern_binding    -> (BOUND! TO! SEME! VARIABLE)? ;
+        sign_pattern_binding    -> (BOUND! TO! SEME! (VARIABLE | iri))? ;
         sign_property_value     -> iri^
                                 |  literal^
                                 |  json_object^ ;
@@ -135,14 +135,14 @@ grammar Denotation
         seme_pattern            -> A! SEME! iri seme_alias seme_properties seme_bindings ;
         seme_alias              -> (AS! VARIABLE)? ;
         seme_properties         -> seme_property* ;
-        seme_property           -> WITH! iri OP_EQ seme_property_value ;
+        seme_property           -> WITH! iri OP_EQ! seme_property_value ;
         seme_property_value     -> iri^
                                 |  literal^
                                 |  VARIABLE^ // expecting alias of a seme
                                 |  VARIABLE OP_MEMBER^ iri; // expecting the identifier of a sign as variable
         seme_bindings           -> seme_binding* ;
         seme_binding            -> BIND! TO! SIGN! seme_binding_target^ ;
-        seme_binding_target     -> VARIABLE^ | STRING^ ;
+        seme_binding_target     -> VARIABLE^ | iri^ ;
 
         iri                     -> IRIREF^ | prefixedName^ ;
         prefixedName            -> PNAME_LN^ | PNAME_NS^ ;
