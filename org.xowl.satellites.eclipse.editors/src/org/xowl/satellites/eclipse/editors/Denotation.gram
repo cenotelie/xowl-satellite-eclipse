@@ -113,22 +113,25 @@ grammar Denotation
         denotation_rules        -> rule* ;
         rule                    -> RULE! STRING signs IS! semes ;
 
-        signs                   -> sign_specific^ | sign_patterns^ ;
-        sign_specific           -> SIGN! STRING ;
+        signs                   -> sign_static^ | sign_patterns^ ;
+        sign_static             -> SIGN! iri ;
         sign_patterns           -> sign_pattern (AND! sign_pattern)* ;
         sign_pattern            -> SIGN! VARIABLE sign_pattern_properties sign_pattern_relations sign_pattern_binding ;
         sign_pattern_properties -> sign_pattern_property* ;
         sign_pattern_property   -> WITH! iri (OP_EQ | OP_NEQ) sign_property_value ;
         sign_pattern_relations  -> sign_pattern_relation* ;
-        sign_pattern_relation   -> RELATION! iri VARIABLE ;
+        sign_pattern_relation   -> RELATION! iri (VARIABLE | iri) ;
         sign_pattern_binding    -> (BOUND! TO! SEME! VARIABLE)? ;
         sign_property_value     -> iri^
                                 |  literal^
                                 |  json_object^ ;
 
         semes                   -> seme (AND! seme)* ;
-        seme                    -> seme_explicit^ | seme_pattern^ ;
-        seme_explicit           -> SEME! iri seme_bindings ;
+        seme                    -> seme_static^
+                                |  seme_matched^
+                                |  seme_pattern^ ;
+        seme_static             -> SEME!    iri            seme_properties seme_bindings ;
+        seme_matched            -> SEME!    VARIABLE       seme_properties seme_bindings ;
         seme_pattern            -> A! SEME! iri seme_alias seme_properties seme_bindings ;
         seme_alias              -> (AS! VARIABLE)? ;
         seme_properties         -> seme_property* ;
