@@ -166,29 +166,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>3.2.0</version>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <id>bundle-manifest</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>manifest</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <instructions>
-                        <XOWL-Product-Link>${project.url}</XOWL-Product-Link>
-                        <XOWL-SCM-Tag>${changeSet}</XOWL-SCM-Tag>
-                        <XOWL-Build-Tag>${env.BUILD_TAG}</XOWL-Build-Tag>
-                        <XOWL-Build-Timestamp>${timestamp}</XOWL-Build-Timestamp>
-                    </instructions>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
                 <version>1.6.7</version>
@@ -196,30 +173,6 @@
                 <configuration>
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <id>generate-changeset</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>hgchangeset</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>generate-timestamp</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>create-timestamp</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <timestampFormat>dd/MM/yyyy HH:mm:ss</timestampFormat>
                 </configuration>
             </plugin>
             <plugin>
@@ -241,6 +194,22 @@
             </plugin>
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-source-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>plugin-source</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
                 <artifactId>target-platform-configuration</artifactId>
                 <version>1.0.0</version>
                 <configuration>
@@ -254,16 +223,6 @@
                     <pomDependencies>consider</pomDependencies>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.eclipse.tycho</groupId>
-                <artifactId>tycho-p2-repository-plugin</artifactId>
-                <version>1.0.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.eclipse.tycho</groupId>
-                <artifactId>tycho-p2-plugin</artifactId>
-                <version>1.0.0</version>
-            </plugin> 
         </plugins>
     </build>
 </project>
