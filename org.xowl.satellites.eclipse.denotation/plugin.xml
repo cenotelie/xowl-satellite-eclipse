@@ -12,10 +12,10 @@
                label="xOWL">
             <menu
                   id="org.xowl.satellites.eclipse.menu.denotation"
-                  label="Denotation">
+                  label="Capture Meaning">
                <command
-                     commandId="org.xowl.satellites.eclipse.denotation.CommandCaptureDenotation"
-                     label="Capture Denotation"
+                     commandId="org.xowl.satellites.eclipse.denotation.CommandCaptureDiagram"
+                     label="Capture Diagram Meaning"
                      style="push">
                   <visibleWhen
                         checkEnabled="false">
@@ -46,9 +46,9 @@
          point="org.eclipse.ui.commands">
       <command
             categoryId="org.xowl.satellites.eclipse.denotation.CommandCategory"
-            defaultHandler="org.xowl.satellites.eclipse.denotation.CommandCaptureDenotationHandler"
-            id="org.xowl.satellites.eclipse.denotation.CommandCaptureDenotation"
-            name="Capture Denotation">
+            defaultHandler="org.xowl.satellites.eclipse.denotation.CommandCaptureDiagramHandler"
+            id="org.xowl.satellites.eclipse.denotation.CommandCaptureDiagram"
+            name="Capture Diagram Denotation">
       </command>
       <category
             id="org.xowl.satellites.eclipse.denotation.CommandCategory"

@@ -15,21 +15,41 @@
  * If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package org.xowl.satellites.eclipse.denotation;
+package org.xowl.satellites.eclipse.denotation.parsers;
 
-import org.eclipse.core.commands.AbstractHandler;
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.gmf.runtime.notation.Diagram;
+import org.xowl.infra.denotation.phrases.Parser;
+import org.xowl.infra.denotation.phrases.Phrase;
+import org.xowl.infra.denotation.phrases.PhraseVocabulary;
+import org.xowl.infra.denotation.phrases.Sign;
 
 /**
- * Implements the handler for the command to capture the denotation of a
- * selected notation item
+ * Implements a phrase parser for a GMF notation diagram
  * 
  * @author Laurent Wouters
  */
-public class CommandCaptureDenotationHandler extends AbstractHandler {
+public class DiagramParser implements Parser<Diagram> {
 	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		return null;
+	public String getIdentifier() {
+		return DiagramParser.class.getCanonicalName();
+	}
+
+	@Override
+	public String getName() {
+		return "xOWL Eclipse Satellite - GMF Notation Diagram parser";
+	}
+
+	@Override
+	public PhraseVocabulary getVocabulary() {
+		return PhraseVocabulary.REGISTER;
+	}
+
+	@Override
+	public Phrase parse(Diagram diagram) {
+		List<Sign> signs = new ArrayList<>();
+		return new Phrase(diagram.getName(), diagram.getName(), signs);
 	}
 }
