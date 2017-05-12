@@ -20,7 +20,10 @@ package org.xowl.satellites.eclipse.denotation.parsers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.Edge;
+import org.eclipse.gmf.runtime.notation.Node;
 import org.xowl.infra.denotation.phrases.Parser;
 import org.xowl.infra.denotation.phrases.Phrase;
 import org.xowl.infra.denotation.phrases.PhraseVocabulary;
@@ -50,6 +53,48 @@ public class DiagramParser implements Parser<Diagram> {
 	@Override
 	public Phrase parse(Diagram diagram) {
 		List<Sign> signs = new ArrayList<>();
+
 		return new Phrase(diagram.getName(), diagram.getName(), signs);
+	}
+
+	/**
+	 * When on a diagram
+	 * 
+	 * @param diagram
+	 *            The diagram
+	 * @param signs
+	 *            The buffer of signs
+	 */
+	private void onFindDiagram(Diagram diagram, List<Sign> signs) {
+		Sign sign = new Sign(EcoreUtil.getID(diagram), diagram.getName());
+		signs.add(sign);
+		for (Object object : diagram.getPersistedChildren()) {
+			Node node = (Node) object;
+
+		}
+	}
+
+	/**
+	 * When on a node
+	 * 
+	 * @param node
+	 *            The node
+	 * @param signs
+	 *            The buffer of signs
+	 */
+	private void onFindNode(Node node, Sign parent, List<Sign> signs) {
+
+	}
+
+	/**
+	 * When on an edge
+	 * 
+	 * @param edge
+	 *            The node
+	 * @param signs
+	 *            The buffer of signs
+	 */
+	private void onFindEdge(Edge edge, Sign parent, List<Sign> signs) {
+
 	}
 }

@@ -41,6 +41,10 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.xowl.infra.denotation.phrases.Phrase;
+import org.xowl.infra.utils.IOUtils;
+import org.xowl.satellites.eclipse.denotation.Constants;
+import org.xowl.satellites.eclipse.denotation.parsers.DiagramParser;
 
 /**
  * A wizard to initialize the capture of the denotation of a diagram
@@ -115,31 +119,35 @@ public class DiagramCaptureInitWizard extends Wizard implements INewWizard {
 		}
 		IContainer container = (IContainer) resource;
 
-		monitor.beginTask("Exporting diagram to " + fileName + ".svg", 1);
-		final IFile file = container.getFile(new Path(fileName + ".svg"));
-		if (!file.exists())
-			file.create(new ByteArrayInputStream(new byte[] {}), true, monitor);
-		Runnable runnable = new Runnable() {
+		monitor.beginTask("Exporting diagram to " + fileName + Constants.FILE_REPRESENTATION, 3);
+		final IFile fileRepresentation = container.getFile(new Path(fileName + Constants.FILE_REPRESENTATION));
+		if (!fileRepresentation.exists())
+			fileRepresentation.create(new ByteArrayInputStream(new byte[] {}), true, monitor);
+		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				CopyToImageUtil util = new CopyToImageUtil();
 				try {
-					util.copyToImage(diagram, file.getLocation(), ImageFileFormat.SVG, monitor,
+					util.copyToImage(diagram, fileRepresentation.getLocation(), ImageFileFormat.SVG, monitor,
 							PreferencesHint.USE_DEFAULTS);
 				} catch (CoreException exception) {
 					exception.printStackTrace();
 				}
 			}
-		};
-		Display.getDefault().asyncExec(runnable);
+		});
 		monitor.worked(1);
-		/*
-		 * monitor.setTaskName("Opening file for editing...");
-		 * getShell().getDisplay().asyncExec(new Runnable() { public void run()
-		 * { IWorkbenchPage page =
-		 * PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		 * try { IDE.openEditor(page, file, true); } catch (PartInitException e)
-		 * { } } });
-		 */
+
+		monitor.beginTask("Parsing diagram to " + fileName + Constants.FILE_PHRASE, 1);
+		final IFile filePhrase = container.getFile(new Path(fileName + Constants.FILE_PHRASE));
+		DiagramParser parser = new DiagramParser();
+		Phrase phrase = parser.parse(diagram);
+		filePhrase.setContents(new ByteArrayInputStream(phrase.serializedJSON().getBytes(IOUtils.CHARSET)), IFile.FORCE,
+				monitor);
+		monitor.worked(1);
+
+		monitor.beginTask("Initializes denotation to " + fileName + Constants.FILE_DENOTATION, 1);
+		final IFile fileDenotation = container.getFile(new Path(fileName + Constants.FILE_DENOTATION));
+		fileDenotation.create(new ByteArrayInputStream(new byte[] {}), true, monitor);
+		monitor.worked(1);
 	}
 
 	/**
