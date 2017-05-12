@@ -56,6 +56,21 @@
             <url>${eclipseSite}/tools/gef/updates/releases-pre-composite/</url>
         </repository>
         <repository>
+            <id>emf-emf</id>
+            <layout>p2</layout>
+            <url>${eclipseSite}/modeling/emf/emf/updates/2.12/</url>
+        </repository>
+        <repository>
+            <id>emf-transaction</id>
+            <layout>p2</layout>
+            <url>${eclipseSite}/modeling/emf/transaction/updates/releases/</url>
+        </repository>
+        <repository>
+            <id>emf-validation</id>
+            <layout>p2</layout>
+            <url>${eclipseSite}/modeling/emf/validation/updates/releases/</url>
+        </repository>
+        <repository>
             <id>gmf-notation</id>
             <layout>p2</layout>
             <url>${eclipseSite}/modeling/gmp/gmf-notation/updates/releases/</url>
