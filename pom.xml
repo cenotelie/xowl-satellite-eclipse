@@ -55,9 +55,14 @@
             <url>http://download.eclipse.org/tools/gef/updates/releases-pre-composite/</url>
         </repository>
         <repository>
-            <id>gmf-runtime</id>
+            <id>gmf-notation</id>
             <layout>p2</layout>
             <url>http://download.eclipse.org/modeling/gmp/gmf-notation/updates/releases/</url>
+        </repository>
+        <repository>
+            <id>gmf-runtime</id>
+            <layout>p2</layout>
+            <url>http://download.eclipse.org/modeling/gmp/gmf-runtime/updates/releases/</url>
         </repository>
     </repositories>
     <modules>
