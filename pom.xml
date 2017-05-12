@@ -42,27 +42,28 @@
         <xowlInfraVersion>2.1.0-SNAPSHOT</xowlInfraVersion>
         <xowlPlatformVersion>0.3.1-SNAPSHOT</xowlPlatformVersion>
         <tycho.disableP2Mirrors>true</tycho.disableP2Mirrors>
+        <eclipseSite>http://mirror.ibcp.fr/pub/eclipse/</eclipseSite>
     </properties>
     <repositories>
         <repository>
             <id>ep</id>
             <layout>p2</layout>
-            <url>http://download.eclipse.org/eclipse/updates/4.6/R-4.6.3-201703010400/</url>
+            <url>${eclipseSite}/eclipse/updates/4.6/R-4.6.3-201703010400/</url>
         </repository>
         <repository>
             <id>gef</id>
             <layout>p2</layout>
-            <url>http://download.eclipse.org/tools/gef/updates/releases-pre-composite/</url>
+            <url>${eclipseSite}/tools/gef/updates/releases-pre-composite/</url>
         </repository>
         <repository>
             <id>gmf-notation</id>
             <layout>p2</layout>
-            <url>http://download.eclipse.org/modeling/gmp/gmf-notation/updates/releases/</url>
+            <url>${eclipseSite}/modeling/gmp/gmf-notation/updates/releases/</url>
         </repository>
         <repository>
             <id>gmf-runtime</id>
             <layout>p2</layout>
-            <url>http://download.eclipse.org/modeling/gmp/gmf-runtime/updates/releases/</url>
+            <url>${eclipseSite}/modeling/gmp/gmf-runtime/updates/releases/</url>
         </repository>
     </repositories>
     <modules>
