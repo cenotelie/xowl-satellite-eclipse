@@ -7,7 +7,7 @@
     <version>0.1.0-SNAPSHOT</version>
     <name>xOWL Eclipse Satellite</name>
     <description>Artifacts for the Eclipse satellite of the xOWL Collaboration platform.</description>
-    <url>https://holons-hub.com/</url>
+    <url>http://xowl.org/</url>
     <licenses>
         <license>
             <name>GNU Lesser General Public License, Version 3</name>
