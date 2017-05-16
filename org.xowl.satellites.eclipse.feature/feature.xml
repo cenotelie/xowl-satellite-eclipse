@@ -231,7 +231,7 @@ Library.
          unpack="false"/>
 
    <plugin
-         id="org.xowl.satellites.eclipse.denotation"
+         id="org.xowl.satellites.eclipse.preferences"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -239,6 +239,13 @@ Library.
 
    <plugin
          id="org.xowl.satellites.eclipse.editors"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.xowl.satellites.eclipse.denotation"
          download-size="0"
          install-size="0"
          version="0.0.0"
