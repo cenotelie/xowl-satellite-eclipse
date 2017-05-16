@@ -5,7 +5,7 @@
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="true"
-            locationURI="menu:org.xowl.satellites.eclipse.menu">
+            locationURI="popup:org.xowl.satellites.eclipse.menu">
          <menu
                id="org.xowl.satellites.eclipse.menu.denotation"
                label="Meaning Capture">
