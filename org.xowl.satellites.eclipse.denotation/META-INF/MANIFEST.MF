@@ -22,7 +22,8 @@ Require-Bundle: org.eclipse.ui,
  org.xowl.infra.xowl-commons;bundle-version="[2.1.0,2.2.0)",
  org.xowl.infra.xowl-lang;bundle-version="[2.1.0,2.2.0)",
  org.xowl.infra.xowl-store;bundle-version="[2.1.0,2.2.0)",
- org.xowl.infra.xowl-denotation;bundle-version="[2.1.0,2.2.0)"
+ org.xowl.infra.xowl-denotation;bundle-version="[2.1.0,2.2.0)",
+ org.xowl.satellites.eclipse.editors;bundle-version="[0.1.0,0.1.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.xowl.satellites.eclipse.denotation
