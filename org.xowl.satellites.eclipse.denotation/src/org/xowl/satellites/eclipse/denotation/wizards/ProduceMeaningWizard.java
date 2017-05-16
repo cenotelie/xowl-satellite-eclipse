@@ -17,45 +17,43 @@
 
 package org.xowl.satellites.eclipse.denotation.wizards;
 
-import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-import org.xowl.satellites.eclipse.denotation.actions.InitializeDiagramDenotation;
+import org.xowl.satellites.eclipse.denotation.actions.ProduceMeaning;
 
 /**
- * A wizard to initialize the capture of the denotation of a diagram
+ * A wizard to produce the full meaning for a captured denotation
  * 
  * @author Laurent Wouters
  */
-public class DiagramCaptureInitWizard extends Wizard implements INewWizard {
+public class ProduceMeaningWizard extends Wizard implements INewWizard {
 	/**
 	 * The first wizard page
 	 */
-	private DiagramCaptureInitWizardPage page1;
+	private ProduceMeaningWizardPage page1;
 	/**
 	 * The diagram to capture
 	 */
-	private final Diagram diagram;
+	private final IFile fileInput;
 
 	/**
 	 * Constructor for SampleNewWizard.
+	 * 
+	 * @param fileInput
+	 *            The input file
 	 */
-	public DiagramCaptureInitWizard(Diagram diagram) {
+	public ProduceMeaningWizard(IFile fileInput) {
 		super();
 		setNeedsProgressMonitor(true);
-		setWindowTitle("Capture Diagram Meaning - Wizard");
-		this.diagram = diagram;
+		setWindowTitle("Produce Meaning - Wizard");
+		this.fileInput = fileInput;
 	}
 
 	@Override
@@ -64,40 +62,23 @@ public class DiagramCaptureInitWizard extends Wizard implements INewWizard {
 
 	@Override
 	public void addPages() {
-		page1 = new DiagramCaptureInitWizardPage(diagram);
+		page1 = new ProduceMeaningWizardPage(fileInput);
 		addPage(page1);
 	}
 
 	@Override
 	public boolean performFinish() {
 		try {
-			final String containerName = page1.getContainerName();
-			final String fileName = page1.getFileName();
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			IResource resource = root.findMember(new Path(containerName));
-			if (!resource.exists() || !(resource instanceof IContainer)) {
-				throwCoreException("Container \"" + containerName + "\" does not exist.");
-			}
-			IContainer container = (IContainer) resource;
-			InitializeDiagramDenotation action = new InitializeDiagramDenotation(diagram, container, fileName);
+			IFile filePhrase = root.getFile(new Path(page1.getFilePhrase()));
+			IFile fileDenotation = root.getFile(new Path(page1.getFileDenotation()));
+			IFile fileMeaning = root.getFile(new Path(page1.getFileMeaning()));
+			ProduceMeaning action = new ProduceMeaning(filePhrase, fileDenotation, fileMeaning, page1.getGraph());
 			Display.getDefault().asyncExec(action);
-		} catch (CoreException exception) {
+		} catch (Exception exception) {
 			exception.printStackTrace();
 			return false;
 		}
 		return true;
-	}
-
-	/**
-	 * Throws a core exception
-	 * 
-	 * @param message
-	 *            The message's exception
-	 * @throws CoreException
-	 *             The exception
-	 */
-	private void throwCoreException(String message) throws CoreException {
-		IStatus status = new Status(IStatus.ERROR, "org.xowl.satellites.eclipse.denotation", IStatus.OK, message, null);
-		throw new CoreException(status);
 	}
 }

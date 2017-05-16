@@ -17,6 +17,8 @@
 
 package org.xowl.satellites.eclipse.denotation;
 
+import org.xowl.infra.store.Repository;
+
 /**
  * Defines some constants for the denotation capture
  * 
@@ -35,4 +37,12 @@ public interface Constants {
 	 * The file extension for a denotation
 	 */
 	String FILE_DENOTATION = ".denotation";
+	/**
+	 * The file extension for a meaning
+	 */
+	String FILE_MEANING = Repository.SYNTAX_TRIG_EXTENSION;
+	/**
+	 * The syntax for a meaning file
+	 */
+	String MEANING_SYNTAX = Repository.SYNTAX_TRIG;
 }

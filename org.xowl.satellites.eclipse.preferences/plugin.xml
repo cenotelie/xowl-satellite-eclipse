@@ -15,4 +15,16 @@
             name="xOWL">
       </page>
    </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               icon="resources/icons/xowl-16.png"
+               id="org.xowl.satellites.eclipse.menu"
+               label="xOWL">
+         </menu>
+      </menuContribution>
+   </extension>
 </plugin>

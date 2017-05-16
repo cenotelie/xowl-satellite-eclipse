@@ -18,6 +18,7 @@
 package org.xowl.satellites.eclipse.denotation;
 
 import org.eclipse.core.expressions.PropertyTester;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -29,13 +30,28 @@ import org.eclipse.jface.viewers.IStructuredSelection;
  */
 public class DenotationPropertyTester extends PropertyTester {
 	/**
+	 * The IsPhraseOrDenotation property
+	 */
+	public static final String IS_PHRASE_OR_DENOTATION = "IsPhraseOrDenotation";
+	/**
 	 * The IsGmfNotationElement property
 	 */
 	public static final String IS_GMF_NOTATION_ELEMENT = "IsGmfNotationElement";
 
 	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		if (IS_GMF_NOTATION_ELEMENT.equals(property) && receiver instanceof IStructuredSelection) {
+		if (IS_PHRASE_OR_DENOTATION.equals(property) && receiver instanceof IStructuredSelection) {
+			if (((IStructuredSelection) receiver).size() != 1)
+				return false;
+			Object selected = ((IStructuredSelection) receiver).getFirstElement();
+			if (selected == null)
+				return false;
+			if (!(selected instanceof IFile))
+				return false;
+			IFile file = (IFile) selected;
+			return (file.getName().endsWith(Constants.FILE_PHRASE)
+					|| file.getName().endsWith(Constants.FILE_DENOTATION));
+		} else if (IS_GMF_NOTATION_ELEMENT.equals(property) && receiver instanceof IStructuredSelection) {
 			if (((IStructuredSelection) receiver).size() != 1)
 				return false;
 			Object selected = ((IStructuredSelection) receiver).getFirstElement();

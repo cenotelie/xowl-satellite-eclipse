@@ -5,30 +5,40 @@
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="true"
-            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+            locationURI="menu:org.xowl.satellites.eclipse.menu">
          <menu
-               icon="platform:/plugin/org.xowl.satellites.eclipse.editors/resources/icons/xowl-16.png"
-               id="org.xowl.satellites.eclipse.menu"
-               label="xOWL">
-            <menu
-                  id="org.xowl.satellites.eclipse.menu.denotation"
-                  label="Capture Meaning">
-               <command
-                     commandId="org.xowl.satellites.eclipse.denotation.CommandCaptureDiagram"
-                     label="Capture Diagram Meaning"
-                     style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <with
-                           variable="selection">
-                        <test
-                              forcePluginActivation="true"
-                              property="org.xowl.satellites.eclipse.denotation.properties.IsGmfNotationElement">
-                        </test>
-                     </with>
-                  </visibleWhen>
-               </command>
-            </menu>
+               id="org.xowl.satellites.eclipse.menu.denotation"
+               label="Meaning Capture">
+         <command
+               commandId="org.xowl.satellites.eclipse.denotation.CommandProduceMeaning"
+               label="Produce Meaning"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <test
+                        forcePluginActivation="true"
+                        property="org.xowl.satellites.eclipse.denotation.properties.IsPhraseOrDenotation">
+                  </test>
+               </with>
+            </visibleWhen>
+         </command>
+            <command
+                  commandId="org.xowl.satellites.eclipse.denotation.CommandCaptureDiagram"
+                  label="Capture Diagram Meaning"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <with
+                        variable="selection">
+                     <test
+                           forcePluginActivation="true"
+                           property="org.xowl.satellites.eclipse.denotation.properties.IsGmfNotationElement">
+                     </test>
+                  </with>
+               </visibleWhen>
+            </command>
          </menu>
       </menuContribution>
    </extension>
@@ -38,12 +48,18 @@
             class="org.xowl.satellites.eclipse.denotation.DenotationPropertyTester"
             id="org.xowl.satellites.eclipse.denotation.PropertyTester"
             namespace="org.xowl.satellites.eclipse.denotation.properties"
-            properties="IsGmfNotationElement"
+            properties="IsPhraseOrDenotation,IsGmfNotationElement"
             type="org.eclipse.jface.viewers.IStructuredSelection">
       </propertyTester>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.xowl.satellites.eclipse.denotation.CommandCategory"
+            defaultHandler="org.xowl.satellites.eclipse.denotation.CommandProduceMeaningHandler"
+            id="org.xowl.satellites.eclipse.denotation.CommandProduceMeaning"
+            name="Produce Meaning">
+      </command>
       <command
             categoryId="org.xowl.satellites.eclipse.denotation.CommandCategory"
             defaultHandler="org.xowl.satellites.eclipse.denotation.CommandCaptureDiagramHandler"
