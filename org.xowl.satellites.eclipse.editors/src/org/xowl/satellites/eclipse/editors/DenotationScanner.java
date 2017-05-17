@@ -79,6 +79,7 @@ public class DenotationScanner extends HimePresentationRepairer {
 		case DenotationLexer.ID.BIND:
 		case DenotationLexer.ID.TO:
 		case DenotationLexer.ID.A:
+		case DenotationLexer.ID.ID:
 		case DenotationLexer.ID.AS:
 			return doCreateStyle(token, KEYWORD_COLOR);
 		case DenotationLexer.ID.TRUE:
