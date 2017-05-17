@@ -84,7 +84,7 @@ public class InitializeDiagramDenotation implements Runnable {
 	 *             When an error occurs
 	 */
 	private void doRun() throws Exception {
-		final IFile fileRepresentation = targetContainer.getFile(new Path(targetName + Constants.FILE_REPRESENTATION));
+		final IFile fileRepresentation = targetContainer.getFile(new Path(targetName + ".svg"));
 		if (!fileRepresentation.exists())
 			fileRepresentation.create(new ByteArrayInputStream(new byte[] {}), true, null);
 		Display.getDefault().asyncExec(new Runnable() {

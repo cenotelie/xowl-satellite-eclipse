@@ -19,6 +19,7 @@ package org.xowl.satellites.eclipse.denotation;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.xowl.infra.denotation.phrases.PhraseVocabulary;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -26,6 +27,12 @@ import org.osgi.framework.BundleContext;
  * @author Laurent Wouters
  */
 public class Activator extends AbstractUIPlugin {
+	static {
+		PhraseVocabulary.REGISTER.addRelation(Constants.RELATION_FROM);
+		PhraseVocabulary.REGISTER.addRelation(Constants.RELATION_TO);
+		PhraseVocabulary.REGISTER.addRelation(Constants.RELATION_NEXT);
+	}
+
 	// The shared instance
 	private static Activator plugin;
 

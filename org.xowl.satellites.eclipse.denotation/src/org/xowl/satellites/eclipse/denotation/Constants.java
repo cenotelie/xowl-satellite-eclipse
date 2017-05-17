@@ -17,6 +17,7 @@
 
 package org.xowl.satellites.eclipse.denotation;
 
+import org.xowl.infra.denotation.phrases.SignRelation;
 import org.xowl.infra.store.Repository;
 
 /**
@@ -45,4 +46,19 @@ public interface Constants {
 	 * The syntax for a meaning file
 	 */
 	String MEANING_SYNTAX = Repository.SYNTAX_TRIG;
+
+	/**
+	 * The from relation
+	 */
+	public static final SignRelation RELATION_FROM = new SignRelation("http://xowl.org/infra/denotation/schema#from",
+			"from");
+	/**
+	 * The to relation
+	 */
+	public static final SignRelation RELATION_TO = new SignRelation("http://xowl.org/infra/denotation/schema#to", "to");
+	/**
+	 * The next relation
+	 */
+	public static final SignRelation RELATION_NEXT = new SignRelation("http://xowl.org/infra/denotation/schema#next",
+			"next");
 }
