@@ -22,6 +22,7 @@ import java.io.ByteArrayInputStream;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.image.ImageFileFormat;
@@ -91,8 +92,8 @@ public class InitializeDiagramDenotation implements Runnable {
 			public void run() {
 				CopyToImageUtil util = new CopyToImageUtil();
 				try {
-					util.copyToImage(diagram, fileRepresentation.getLocation(), ImageFileFormat.SVG, null,
-							PreferencesHint.USE_DEFAULTS);
+					util.copyToImage(diagram, fileRepresentation.getLocation(), ImageFileFormat.SVG,
+							new NullProgressMonitor(), PreferencesHint.USE_DEFAULTS);
 				} catch (CoreException exception) {
 					exception.printStackTrace();
 				}
