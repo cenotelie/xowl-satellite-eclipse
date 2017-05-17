@@ -26,6 +26,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
 import org.xowl.infra.denotation.Denotation;
 import org.xowl.infra.denotation.phrases.Phrase;
 import org.xowl.infra.denotation.rules.DenotationRule;
@@ -86,6 +88,7 @@ public class ProduceMeaning implements Runnable {
 		try {
 			doRun();
 		} catch (Exception exception) {
+			MessageDialog.openError(Display.getCurrent().getActiveShell(), "Produce Meaning", exception.getMessage());
 			exception.printStackTrace();
 		}
 	}
@@ -135,6 +138,9 @@ public class ProduceMeaning implements Runnable {
 					null);
 		else
 			fileTarget.create(new ByteArrayInputStream(writer.toString().getBytes(IOUtils.CHARSET)), true, null);
+
+		MessageDialog.openInformation(Display.getCurrent().getActiveShell(), "Produce Meaning",
+				"Meaning has been produced as " + fileTarget.getName());
 	}
 
 	/**

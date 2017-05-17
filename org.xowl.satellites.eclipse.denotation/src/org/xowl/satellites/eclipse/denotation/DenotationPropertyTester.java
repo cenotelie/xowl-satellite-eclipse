@@ -34,6 +34,10 @@ public class DenotationPropertyTester extends PropertyTester {
 	 */
 	public static final String IS_PHRASE_OR_DENOTATION = "IsPhraseOrDenotation";
 	/**
+	 * The IsMeaning property
+	 */
+	public static final String IS_MEANING = "IsMeaning";
+	/**
 	 * The IsGmfNotationElement property
 	 */
 	public static final String IS_GMF_NOTATION_ELEMENT = "IsGmfNotationElement";
@@ -51,6 +55,16 @@ public class DenotationPropertyTester extends PropertyTester {
 			IFile file = (IFile) selected;
 			return (file.getName().endsWith(Constants.FILE_PHRASE)
 					|| file.getName().endsWith(Constants.FILE_DENOTATION));
+		} else if (IS_MEANING.equals(property) && receiver instanceof IStructuredSelection) {
+			if (((IStructuredSelection) receiver).size() != 1)
+				return false;
+			Object selected = ((IStructuredSelection) receiver).getFirstElement();
+			if (selected == null)
+				return false;
+			if (!(selected instanceof IFile))
+				return false;
+			IFile file = (IFile) selected;
+			return file.getName().endsWith(Constants.FILE_MEANING);
 		} else if (IS_GMF_NOTATION_ELEMENT.equals(property) && receiver instanceof IStructuredSelection) {
 			if (((IStructuredSelection) receiver).size() != 1)
 				return false;

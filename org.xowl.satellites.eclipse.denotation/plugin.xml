@@ -39,6 +39,21 @@
                   </with>
                </visibleWhen>
             </command>
+            <command
+                  commandId="org.xowl.satellites.eclipse.denotation.CommandShareMeaning"
+                  label="Share"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <with
+                        variable="selection">
+                     <test
+                           forcePluginActivation="true"
+                           property="org.xowl.satellites.eclipse.denotation.properties.IsMeaning">
+                     </test>
+                  </with>
+               </visibleWhen>
+            </command>
          </menu>
       </menuContribution>
    </extension>
@@ -48,7 +63,7 @@
             class="org.xowl.satellites.eclipse.denotation.DenotationPropertyTester"
             id="org.xowl.satellites.eclipse.denotation.PropertyTester"
             namespace="org.xowl.satellites.eclipse.denotation.properties"
-            properties="IsPhraseOrDenotation,IsGmfNotationElement"
+            properties="IsPhraseOrDenotation,IsMeaning,IsGmfNotationElement"
             type="org.eclipse.jface.viewers.IStructuredSelection">
       </propertyTester>
    </extension>
@@ -65,6 +80,12 @@
             defaultHandler="org.xowl.satellites.eclipse.denotation.CommandCaptureDiagramHandler"
             id="org.xowl.satellites.eclipse.denotation.CommandCaptureDiagram"
             name="Capture Diagram Denotation">
+      </command>
+      <command
+            categoryId="org.xowl.satellites.eclipse.denotation.CommandCategory"
+            defaultHandler="org.xowl.satellites.eclipse.denotation.CommandShareMeaningHandler"
+            id="org.xowl.satellites.eclipse.denotation.CommandShareMeaning"
+            name="Share Meaning">
       </command>
       <category
             id="org.xowl.satellites.eclipse.denotation.CommandCategory"

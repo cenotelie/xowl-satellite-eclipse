@@ -28,6 +28,7 @@ import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.image.ImageFileFormat;
 import org.eclipse.gmf.runtime.diagram.ui.render.util.CopyToImageUtil;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.xowl.infra.denotation.phrases.Phrase;
 import org.xowl.infra.utils.IOUtils;
@@ -74,6 +75,8 @@ public class InitializeDiagramDenotation implements Runnable {
 		try {
 			doRun();
 		} catch (Exception exception) {
+			MessageDialog.openError(Display.getCurrent().getActiveShell(), "Initialize Diagram Denotation",
+					exception.getMessage());
 			exception.printStackTrace();
 		}
 	}
@@ -95,6 +98,8 @@ public class InitializeDiagramDenotation implements Runnable {
 					util.copyToImage(diagram, fileRepresentation.getLocation(), ImageFileFormat.SVG,
 							new NullProgressMonitor(), PreferencesHint.USE_DEFAULTS);
 				} catch (CoreException exception) {
+					MessageDialog.openError(Display.getCurrent().getActiveShell(), "Initialize Diagram Denotation",
+							exception.getMessage());
 					exception.printStackTrace();
 				}
 			}
@@ -111,5 +116,8 @@ public class InitializeDiagramDenotation implements Runnable {
 		final IFile fileDenotation = targetContainer.getFile(new Path(targetName + Constants.FILE_DENOTATION));
 		if (!fileDenotation.exists())
 			fileDenotation.create(new ByteArrayInputStream(new byte[] {}), true, null);
+
+		MessageDialog.openInformation(Display.getCurrent().getActiveShell(), "Initialize Diagram Denotation",
+				"Initialization is complete.");
 	}
 }
