@@ -26,7 +26,7 @@ import org.eclipse.jface.wizard.IWizard;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.xowl.satellites.eclipse.denotation.wizards.ProduceMeaningWizard;
+import org.xowl.satellites.eclipse.denotation.wizards.ShareMeaningWizard;
 
 /**
  * Implements the handler for sharing a captured meaning
@@ -46,7 +46,7 @@ public class CommandShareMeaningHandler extends AbstractHandler {
 			return null;
 		final IFile file = (IFile) selected;
 
-		IWizard wizard = new ProduceMeaningWizard(file);
+		IWizard wizard = new ShareMeaningWizard(file);
 		WizardDialog dialog = new WizardDialog(Display.getCurrent().getActiveShell(), wizard);
 		dialog.setTitle(wizard.getWindowTitle());
 		dialog.open();

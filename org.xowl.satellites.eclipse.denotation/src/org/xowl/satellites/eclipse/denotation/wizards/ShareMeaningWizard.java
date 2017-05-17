@@ -18,28 +18,25 @@
 package org.xowl.satellites.eclipse.denotation.wizards;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-import org.xowl.satellites.eclipse.denotation.actions.ProduceMeaning;
+import org.xowl.satellites.eclipse.denotation.actions.ShareMeaning;
 
 /**
- * A wizard to produce the full meaning for a captured denotation
+ * A wizard to share meaning
  * 
  * @author Laurent Wouters
  */
-public class ProduceMeaningWizard extends Wizard implements INewWizard {
+public class ShareMeaningWizard extends Wizard implements INewWizard {
 	/**
 	 * The first wizard page
 	 */
-	private ProduceMeaningWizardPage page1;
+	private ShareMeaningWizardPage page1;
 	/**
-	 * The diagram to capture
+	 * The file with the meaning to share
 	 */
 	private final IFile fileInput;
 
@@ -47,12 +44,12 @@ public class ProduceMeaningWizard extends Wizard implements INewWizard {
 	 * Constructor for this wizard.
 	 * 
 	 * @param fileInput
-	 *            The input file
+	 *            The file with the meaning to share
 	 */
-	public ProduceMeaningWizard(IFile fileInput) {
+	public ShareMeaningWizard(IFile fileInput) {
 		super();
 		setNeedsProgressMonitor(true);
-		setWindowTitle("Produce Meaning - Wizard");
+		setWindowTitle("Share Meaning - Wizard");
 		this.fileInput = fileInput;
 	}
 
@@ -62,18 +59,15 @@ public class ProduceMeaningWizard extends Wizard implements INewWizard {
 
 	@Override
 	public void addPages() {
-		page1 = new ProduceMeaningWizardPage(fileInput);
+		page1 = new ShareMeaningWizardPage(fileInput);
 		addPage(page1);
 	}
 
 	@Override
 	public boolean performFinish() {
 		try {
-			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			IFile filePhrase = root.getFile(new Path(page1.getFilePhrase()));
-			IFile fileDenotation = root.getFile(new Path(page1.getFileDenotation()));
-			IFile fileMeaning = root.getFile(new Path(page1.getFileMeaning()));
-			ProduceMeaning action = new ProduceMeaning(filePhrase, fileDenotation, fileMeaning, page1.getGraph());
+			ShareMeaning action = new ShareMeaning(fileInput, page1.getArtifactName(), page1.getArtifactBase(),
+					page1.getArtifactVersion(), page1.getArtifactArchetype());
 			Display.getDefault().asyncExec(action);
 		} catch (Exception exception) {
 			exception.printStackTrace();

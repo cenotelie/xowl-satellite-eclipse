@@ -49,7 +49,7 @@ public class DiagramCaptureInitWizard extends Wizard implements INewWizard {
 	private final Diagram diagram;
 
 	/**
-	 * Constructor for SampleNewWizard.
+	 * Constructor for this wizard.
 	 */
 	public DiagramCaptureInitWizard(Diagram diagram) {
 		super();
