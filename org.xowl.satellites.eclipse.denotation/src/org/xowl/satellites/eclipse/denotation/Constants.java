@@ -61,4 +61,9 @@ public interface Constants {
 	 */
 	public static final SignRelation RELATION_NEXT = new SignRelation("http://xowl.org/infra/denotation/schema#next",
 			"next");
+	/**
+	 * The inDiagram relation
+	 */
+	public static final SignRelation RELATION_IN_DIAGRAM = new SignRelation("http://xowl.org/infra/denotation/schema#inDiagram",
+			"inDiagram");
 }

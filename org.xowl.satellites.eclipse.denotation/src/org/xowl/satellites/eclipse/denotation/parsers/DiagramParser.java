@@ -109,7 +109,7 @@ public class DiagramParser implements Parser<Diagram> {
 		if (name == null)
 			name = identifier;
 		Sign sign = new Sign(identifier, name);
-		signsMap.put(sign, sign);
+		signsMap.put(node, sign);
 
 		sign.addPropertyValue(SignPropertyName.INSTANCE, name);
 		sign.addPropertyValue(SignPropertyZone2D.INSTANCE, identifier);
@@ -117,6 +117,7 @@ public class DiagramParser implements Parser<Diagram> {
 		if (shape != null)
 			sign.addPropertyValue(SignPropertyShape.INSTANCE, shape);
 
+		sign.addRelationSign(Constants.RELATION_IN_DIAGRAM, signsMap.get(node.getDiagram()));
 		sign.addRelationSign(SignRelation.RELATION_CONTAINED_BY, parent);
 		parent.addRelationSign(SignRelation.RELATION_CONTAINS, sign);
 
@@ -140,7 +141,7 @@ public class DiagramParser implements Parser<Diagram> {
 		if (name == null)
 			name = identifier;
 		Sign sign = new Sign(identifier, name);
-		signsMap.put(sign, sign);
+		signsMap.put(edge, sign);
 
 		sign.addPropertyValue(SignPropertyName.INSTANCE, name);
 		sign.addPropertyValue(SignPropertyZone2D.INSTANCE, identifier);
@@ -148,14 +149,9 @@ public class DiagramParser implements Parser<Diagram> {
 		if (shape != null)
 			sign.addPropertyValue(SignPropertyShape.INSTANCE, shape);
 
+		sign.addRelationSign(Constants.RELATION_IN_DIAGRAM, signsMap.get(edge.getDiagram()));
 		sign.addRelationSign(SignRelation.RELATION_CONTAINED_BY, parent);
 		parent.addRelationSign(SignRelation.RELATION_CONTAINS, sign);
-		Sign source = signsMap.get(edge.getSource());
-		Sign target = signsMap.get(edge.getTarget());
-		if (source != null)
-			sign.addRelationSign(Constants.RELATION_FROM, source);
-		if (target != null)
-			sign.addRelationSign(Constants.RELATION_TO, source);
 
 		for (Object object : edge.getPersistedChildren()) {
 			Node child = (Node) object;
@@ -187,8 +183,13 @@ public class DiagramParser implements Parser<Diagram> {
 	 * @param signsMap
 	 *            The map of known signs
 	 */
-	private void loadEdge(Edge node, Sign sign, Map<Object, Sign> signsMap) {
-
+	private void loadEdge(Edge edge, Sign sign, Map<Object, Sign> signsMap) {
+		Sign source = signsMap.get(edge.getSource());
+		Sign target = signsMap.get(edge.getTarget());
+		if (source != null)
+			sign.addRelationSign(Constants.RELATION_FROM, source);
+		if (target != null)
+			sign.addRelationSign(Constants.RELATION_TO, target);
 	}
 
 	/**

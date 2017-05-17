@@ -109,6 +109,7 @@ public class InitializeDiagramDenotation implements Runnable {
 				null);
 
 		final IFile fileDenotation = targetContainer.getFile(new Path(targetName + Constants.FILE_DENOTATION));
-		fileDenotation.create(new ByteArrayInputStream(new byte[] {}), true, null);
+		if (!fileDenotation.exists())
+			fileDenotation.create(new ByteArrayInputStream(new byte[] {}), true, null);
 	}
 }

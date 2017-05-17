@@ -31,6 +31,7 @@ public class Activator extends AbstractUIPlugin {
 		PhraseVocabulary.REGISTER.addRelation(Constants.RELATION_FROM);
 		PhraseVocabulary.REGISTER.addRelation(Constants.RELATION_TO);
 		PhraseVocabulary.REGISTER.addRelation(Constants.RELATION_NEXT);
+		PhraseVocabulary.REGISTER.addRelation(Constants.RELATION_IN_DIAGRAM);
 	}
 
 	// The shared instance
