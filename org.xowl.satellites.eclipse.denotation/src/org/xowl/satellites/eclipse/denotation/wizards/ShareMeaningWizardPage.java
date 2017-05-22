@@ -27,6 +27,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.xowl.infra.utils.http.URIUtils;
 import org.xowl.platform.kernel.artifacts.ArtifactArchetypeFree;
 
 /**
@@ -134,9 +135,10 @@ public class ShareMeaningWizardPage extends WizardPage {
 	 * Initializes the content of this page
 	 */
 	private void initialize() {
-		artifactName.setText(fileInput.getName().substring(0,
-				fileInput.getName().length() - fileInput.getFileExtension().length() - 1));
-		artifactBase.setText("http://xowl.org/myArtifact");
+		String fileName = fileInput.getName().substring(0,
+				fileInput.getName().length() - fileInput.getFileExtension().length() - 1);
+		artifactName.setText(fileName);
+		artifactBase.setText("http://xowl.org/artifacts/" + URIUtils.encodeComponent(fileName));
 		artifactVersion.setText("v1");
 		artifactArchetype.setText(ArtifactArchetypeFree.INSTANCE.getIdentifier());
 	}
