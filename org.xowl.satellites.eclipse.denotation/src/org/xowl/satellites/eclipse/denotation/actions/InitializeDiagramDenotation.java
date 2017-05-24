@@ -30,6 +30,10 @@ import org.eclipse.gmf.runtime.diagram.ui.render.util.CopyToImageUtil;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.FileEditorInput;
 import org.xowl.infra.denotation.phrases.Phrase;
 import org.xowl.infra.utils.IOUtils;
 import org.xowl.satellites.eclipse.denotation.Constants;
@@ -116,6 +120,11 @@ public class InitializeDiagramDenotation implements Runnable {
 		final IFile fileDenotation = targetContainer.getFile(new Path(targetName + Constants.FILE_DENOTATION));
 		if (!fileDenotation.exists())
 			fileDenotation.create(new ByteArrayInputStream(new byte[] {}), true, null);
+
+		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		IEditorDescriptor descriptor = PlatformUI.getWorkbench().getEditorRegistry()
+				.getDefaultEditor(fileDenotation.getName());
+		page.openEditor(new FileEditorInput(fileDenotation), descriptor.getId());
 
 		MessageDialog.openInformation(Display.getCurrent().getActiveShell(), "Initialize Diagram Denotation",
 				"Initialization is complete.");
