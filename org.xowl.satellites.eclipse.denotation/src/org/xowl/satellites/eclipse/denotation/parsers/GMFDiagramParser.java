@@ -17,6 +17,7 @@
 
 package org.xowl.satellites.eclipse.denotation.parsers;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,15 +26,22 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gmf.runtime.notation.Bendpoints;
+import org.eclipse.gmf.runtime.notation.Bounds;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
+import org.eclipse.gmf.runtime.notation.LayoutConstraint;
+import org.eclipse.gmf.runtime.notation.Location;
 import org.eclipse.gmf.runtime.notation.Node;
+import org.eclipse.gmf.runtime.notation.RelativeBendpoints;
 import org.xowl.infra.denotation.phrases.Parser;
 import org.xowl.infra.denotation.phrases.Phrase;
 import org.xowl.infra.denotation.phrases.PhraseVocabulary;
 import org.xowl.infra.denotation.phrases.Sign;
 import org.xowl.infra.denotation.phrases.SignPropertyName;
+import org.xowl.infra.denotation.phrases.SignPropertyPosition2D;
 import org.xowl.infra.denotation.phrases.SignPropertyShape;
+import org.xowl.infra.denotation.phrases.SignPropertySize2D;
 import org.xowl.infra.denotation.phrases.SignPropertyZone2D;
 import org.xowl.infra.denotation.phrases.SignRelation;
 import org.xowl.satellites.eclipse.denotation.Constants;
@@ -87,7 +95,7 @@ public class GMFDiagramParser implements Parser<Diagram> {
 		signsMap.put(diagram, sign);
 		for (Object object : diagram.getPersistedChildren()) {
 			Node node = (Node) object;
-			onFindNode(node, sign, signsMap);
+			onFindNode(node, sign, signsMap, 0, 0, 0, 0);
 		}
 		for (Object object : diagram.getPersistedEdges()) {
 			Edge edge = (Edge) object;
@@ -102,8 +110,17 @@ public class GMFDiagramParser implements Parser<Diagram> {
 	 *            The node
 	 * @param signsMap
 	 *            The map of known signs
+	 * @param offsetX
+	 *            The total offset of this node from the diagram boundary
+	 * @param offsetY
+	 *            The total offset of this node from the diagram boundary
+	 * @param parentWidth
+	 *            The width of the parent node
+	 * @param parentHeight
+	 *            The height of the parent node
 	 */
-	private void onFindNode(Node node, Sign parent, Map<Object, Sign> signsMap) {
+	private void onFindNode(Node node, Sign parent, Map<Object, Sign> signsMap, int offsetX, int offsetY,
+			int parentWidth, int parentHeight) {
 		String identifier = EcoreUtil.getURI(node).toString();
 		String name = getName(node.getElement());
 		if (name == null)
@@ -111,8 +128,36 @@ public class GMFDiagramParser implements Parser<Diagram> {
 		Sign sign = new Sign(identifier, name);
 		signsMap.put(node, sign);
 
+		int x = offsetX;
+		int y = offsetY;
+		int width = 0;
+		int height = 0;
+		LayoutConstraint layoutConstraint = node.getLayoutConstraint();
+		if (layoutConstraint != null && layoutConstraint instanceof Bounds) {
+			Bounds bounds = (Bounds) layoutConstraint;
+			x += bounds.getX();
+			y += bounds.getY();
+			width = bounds.getWidth();
+			height = bounds.getHeight();
+			if (width == 0)
+				width = parentWidth - bounds.getX();
+			if (height == 0)
+				height = parentHeight - bounds.getY();
+		} else if (layoutConstraint != null && layoutConstraint instanceof Location) {
+			Location location = (Location) layoutConstraint;
+			x += location.getX();
+			y += location.getY();
+			width = parentWidth - location.getX();
+			height = parentHeight - location.getY();
+		} else {
+			width = parentWidth;
+			height = parentHeight;
+		}
+
 		sign.addPropertyValue(SignPropertyName.INSTANCE, name);
 		sign.addPropertyValue(SignPropertyZone2D.INSTANCE, identifier);
+		sign.addPropertyValue(SignPropertyPosition2D.INSTANCE, new Point2D.Double(x, y));
+		sign.addPropertyValue(SignPropertySize2D.INSTANCE, new Point2D.Double(width, height));
 		String shape = node.getType();
 		if (shape != null)
 			sign.addPropertyValue(SignPropertyShape.INSTANCE, shape);
@@ -123,7 +168,7 @@ public class GMFDiagramParser implements Parser<Diagram> {
 
 		for (Object object : node.getPersistedChildren()) {
 			Node child = (Node) object;
-			onFindNode(child, sign, signsMap);
+			onFindNode(child, sign, signsMap, x, y, width, height);
 		}
 	}
 
@@ -143,6 +188,12 @@ public class GMFDiagramParser implements Parser<Diagram> {
 		Sign sign = new Sign(identifier, name);
 		signsMap.put(edge, sign);
 
+		Bendpoints bendpoints = edge.getBendpoints();
+		if (bendpoints != null && bendpoints instanceof RelativeBendpoints) {
+			RelativeBendpoints relativeBendpoints = (RelativeBendpoints) bendpoints;
+			relativeBendpoints.getPoints();
+		}
+
 		sign.addPropertyValue(SignPropertyName.INSTANCE, name);
 		sign.addPropertyValue(SignPropertyZone2D.INSTANCE, identifier);
 		String shape = edge.getType();
@@ -155,7 +206,7 @@ public class GMFDiagramParser implements Parser<Diagram> {
 
 		for (Object object : edge.getPersistedChildren()) {
 			Node child = (Node) object;
-			onFindNode(child, sign, signsMap);
+			onFindNode(child, sign, signsMap, 0, 0, 0, 0);
 		}
 	}
 
