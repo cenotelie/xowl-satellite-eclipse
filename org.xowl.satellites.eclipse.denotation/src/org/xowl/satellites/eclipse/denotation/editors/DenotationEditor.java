@@ -160,7 +160,7 @@ public class DenotationEditor extends MultiPageEditorPart {
 	 *            The index for the editor
 	 */
 	private void doAddPageForRepresentation(IFile file, int index) {
-		addPage(index, null);
+		addPage(index, new RepresentationWithAnnotations(getContainer(), file));
 		setPageText(index, PAGE_REPRESENTATION);
 	}
 
@@ -173,7 +173,7 @@ public class DenotationEditor extends MultiPageEditorPart {
 	 *            The index for the editor
 	 */
 	private void doAddPageForRepresentationSvg(IFile file, int index) {
-		addPage(index, null);
+		addPage(index, new RepresentationWithAnnotations(getContainer(), file));
 		setPageText(index, PAGE_REPRESENTATION);
 	}
 
