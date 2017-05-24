@@ -17,22 +17,16 @@
 
 package org.xowl.satellites.eclipse.denotation.editors;
 
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
+import org.xowl.satellites.eclipse.editors.TriGEditor;
 
 /**
- * The contributor for the denotation visualizer
+ * Represents an editor for the meaning produced by a denotation
  *
  * @author Laurent Wouters
  */
-public class DenotationVisualizerContributor extends MultiPageEditorActionBarContributor {
-	/**
-	 * Initializes this contributor
-	 */
-	public DenotationVisualizerContributor() {
-	}
-
+public class MeaningEditor extends TriGEditor {
 	@Override
-	public void setActivePage(IEditorPart activeEditor) {
+	public boolean isEditable() {
+		return false;
 	}
 }

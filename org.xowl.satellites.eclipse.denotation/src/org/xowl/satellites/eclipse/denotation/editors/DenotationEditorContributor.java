@@ -15,23 +15,24 @@
  * If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package org.xowl.satellites.eclipse.editors;
+package org.xowl.satellites.eclipse.denotation.editors;
 
-import org.eclipse.ui.editors.text.FileDocumentProvider;
-import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
 
 /**
- * The editor for the denotation syntax
- * 
+ * The contributor for the denotation editor
+ *
  * @author Laurent Wouters
  */
-public class DenotationEditor extends TextEditor {
+public class DenotationEditorContributor extends MultiPageEditorActionBarContributor {
 	/**
-	 * Initializes this editor
+	 * Initializes this contributor
 	 */
-	public DenotationEditor() {
-		super();
-		setSourceViewerConfiguration(new HimeEditorConfiguration(new DenotationScanner()));
-		setDocumentProvider(new FileDocumentProvider());
+	public DenotationEditorContributor() {
+	}
+
+	@Override
+	public void setActivePage(IEditorPart activeEditor) {
 	}
 }

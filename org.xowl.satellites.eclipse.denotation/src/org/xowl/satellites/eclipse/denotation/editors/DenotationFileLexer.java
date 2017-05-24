@@ -3,7 +3,7 @@
  * Hime Parser Generator 3.0.0.0
  */
 
-package org.xowl.satellites.eclipse.editors;
+package org.xowl.satellites.eclipse.denotation.editors;
 
 import fr.cenotelie.hime.redist.Symbol;
 import fr.cenotelie.hime.redist.lexer.Automaton;
@@ -14,11 +14,11 @@ import java.io.InputStreamReader;
 /**
  * Represents a lexer
  */
-class DenotationLexer extends ContextFreeLexer {
+class DenotationFileLexer extends ContextFreeLexer {
     /**
      * The automaton for this lexer
      */
-    private static final Automaton commonAutomaton = Automaton.find(DenotationLexer.class, "DenotationLexer.bin");
+    private static final Automaton commonAutomaton = Automaton.find(DenotationFileLexer.class, "DenotationFileLexer.bin");
     /**
      * Contains the constant IDs for the terminals for this lexer
      */
@@ -237,7 +237,7 @@ class DenotationLexer extends ContextFreeLexer {
      *
      * @param input The lexer's input
      */
-    public DenotationLexer(String input) {
+    public DenotationFileLexer(String input) {
         super(commonAutomaton, terminals, 0x0006, input);
     }
     /**
@@ -245,7 +245,7 @@ class DenotationLexer extends ContextFreeLexer {
      *
      * @param input The lexer's input
      */
-    public DenotationLexer(InputStreamReader input) {
+    public DenotationFileLexer(InputStreamReader input) {
         super(commonAutomaton, terminals, 0x0006, input);
     }
 }

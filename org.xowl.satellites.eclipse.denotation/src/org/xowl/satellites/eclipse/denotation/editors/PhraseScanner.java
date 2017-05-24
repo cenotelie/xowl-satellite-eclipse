@@ -15,23 +15,21 @@
  * If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package org.xowl.satellites.eclipse.editors;
+package org.xowl.satellites.eclipse.denotation.editors;
 
 import org.eclipse.swt.custom.StyleRange;
+import org.xowl.infra.store.loaders.JsonLexer;
+import org.xowl.satellites.eclipse.editors.HimePresentationRepairer;
 
 import fr.cenotelie.hime.redist.Token;
 import fr.cenotelie.hime.redist.TokenRepository;
 
 /**
- * Implements a scanner for the denotation syntax
+ * Implements a scanner for the syntax of a phrase file
  *
  * @author Laurent Wouters
  */
-public class DenotationScanner extends HimePresentationRepairer {
-	/**
-	 * The color of keywords
-	 */
-	private static final int KEYWORD_COLOR = 0x000000FF;
+public class PhraseScanner extends HimePresentationRepairer {
 	/**
 	 * The color of comment
 	 */
@@ -41,20 +39,20 @@ public class DenotationScanner extends HimePresentationRepairer {
 	 */
 	private static final int LITERAL_COLOR = 0x008A2BE2;
 	/**
-	 * The color of IRIs
+	 * The color of literal string
 	 */
-	private static final int IRI_COLOR = 0x00DC143C;
+	private static final int LITERAL_STRING = 0x000000FF;
 
 	/**
 	 * Initializes this scanner
 	 */
-	public DenotationScanner() {
+	public PhraseScanner() {
 		super();
 	}
 
 	@Override
 	protected TokenRepository doParse(String input) {
-		DenotationLexer lexer = new DenotationLexer(input);
+		JsonLexer lexer = new JsonLexer(input);
 		lexer.setErrorHandler(this);
 		// trigger the full lexing
 		lexer.getNextToken();
@@ -64,35 +62,17 @@ public class DenotationScanner extends HimePresentationRepairer {
 	@Override
 	protected StyleRange doStyle(Token token) {
 		switch (token.getSymbol().getID()) {
-		case DenotationLexer.ID.COMMENT:
+		case JsonLexer.ID.COMMENT:
 			return doCreateStyle(token, COMMENT_COLOR);
-		case DenotationLexer.ID.BASE:
-		case DenotationLexer.ID.PREFIX:
-		case DenotationLexer.ID.RULE:
-		case DenotationLexer.ID.IS:
-		case DenotationLexer.ID.SIGN:
-		case DenotationLexer.ID.SEME:
-		case DenotationLexer.ID.AND:
-		case DenotationLexer.ID.WITH:
-		case DenotationLexer.ID.RELATION:
-		case DenotationLexer.ID.BOUND:
-		case DenotationLexer.ID.BIND:
-		case DenotationLexer.ID.TO:
-		case DenotationLexer.ID.A:
-		case DenotationLexer.ID.ID:
-		case DenotationLexer.ID.AS:
-			return doCreateStyle(token, KEYWORD_COLOR);
-		case DenotationLexer.ID.TRUE:
-		case DenotationLexer.ID.FALSE:
-		case DenotationLexer.ID.INTEGER:
-		case DenotationLexer.ID.DECIMAL:
-		case DenotationLexer.ID.DOUBLE:
-		case DenotationLexer.ID.STRING:
+		case JsonLexer.ID.LITERAL_NULL:
+		case JsonLexer.ID.LITERAL_TRUE:
+		case JsonLexer.ID.LITERAL_FALSE:
+		case JsonLexer.ID.LITERAL_INTEGER:
+		case JsonLexer.ID.LITERAL_DECIMAL:
+		case JsonLexer.ID.LITERAL_DOUBLE:
 			return doCreateStyle(token, LITERAL_COLOR);
-		case DenotationLexer.ID.IRIREF:
-		case DenotationLexer.ID.PNAME_NS:
-		case DenotationLexer.ID.PNAME_LN:
-			return doCreateStyle(token, IRI_COLOR);
+		case JsonLexer.ID.LITERAL_STRING:
+			return doCreateStyle(token, LITERAL_STRING);
 		}
 		return null;
 	}
