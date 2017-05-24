@@ -37,7 +37,7 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.xowl.infra.denotation.phrases.Phrase;
 import org.xowl.infra.utils.IOUtils;
 import org.xowl.satellites.eclipse.denotation.Constants;
-import org.xowl.satellites.eclipse.denotation.parsers.DiagramParser;
+import org.xowl.satellites.eclipse.denotation.parsers.GMFDiagramParser;
 
 /**
  * Initializes the captured denotation of a GMF diagram
@@ -97,7 +97,7 @@ public class InitializeDiagramDenotation implements Runnable {
 			fileRepresentation.create(new ByteArrayInputStream(new byte[] {}), true, null);
 
 		final IFile filePhrase = targetContainer.getFile(new Path(targetName + Constants.FILE_PHRASE));
-		DiagramParser parser = new DiagramParser();
+		GMFDiagramParser parser = new GMFDiagramParser();
 		Phrase phrase = parser.parse(diagram);
 		if (!filePhrase.exists())
 			filePhrase.create(new ByteArrayInputStream(new byte[] {}), true, null);

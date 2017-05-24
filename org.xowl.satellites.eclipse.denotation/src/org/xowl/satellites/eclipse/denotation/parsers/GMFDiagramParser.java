@@ -43,10 +43,10 @@ import org.xowl.satellites.eclipse.denotation.Constants;
  * 
  * @author Laurent Wouters
  */
-public class DiagramParser implements Parser<Diagram> {
+public class GMFDiagramParser implements Parser<Diagram> {
 	@Override
 	public String getIdentifier() {
-		return DiagramParser.class.getCanonicalName();
+		return GMFDiagramParser.class.getCanonicalName();
 	}
 
 	@Override
