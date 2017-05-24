@@ -95,19 +95,6 @@ public class InitializeDiagramDenotation implements Runnable {
 		final IFile fileRepresentation = targetContainer.getFile(new Path(targetName + ".svg"));
 		if (!fileRepresentation.exists())
 			fileRepresentation.create(new ByteArrayInputStream(new byte[] {}), true, null);
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				CopyToImageUtil util = new CopyToImageUtil();
-				try {
-					util.copyToImage(diagram, fileRepresentation.getLocation(), ImageFileFormat.SVG,
-							new NullProgressMonitor(), PreferencesHint.USE_DEFAULTS);
-				} catch (CoreException exception) {
-					MessageDialog.openError(Display.getCurrent().getActiveShell(), "Initialize Diagram Denotation",
-							exception.getMessage());
-					exception.printStackTrace();
-				}
-			}
-		});
 
 		final IFile filePhrase = targetContainer.getFile(new Path(targetName + Constants.FILE_PHRASE));
 		DiagramParser parser = new DiagramParser();
@@ -121,12 +108,32 @@ public class InitializeDiagramDenotation implements Runnable {
 		if (!fileDenotation.exists())
 			fileDenotation.create(new ByteArrayInputStream(new byte[] {}), true, null);
 
-		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		IEditorDescriptor descriptor = PlatformUI.getWorkbench().getEditorRegistry()
-				.getDefaultEditor(fileDenotation.getName());
-		page.openEditor(new FileEditorInput(fileDenotation), descriptor.getId());
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				CopyToImageUtil util = new CopyToImageUtil();
+				try {
+					util.copyToImage(diagram, fileRepresentation.getLocation(), ImageFileFormat.SVG,
+							new NullProgressMonitor(), PreferencesHint.USE_DEFAULTS);
+				} catch (CoreException exception) {
+					MessageDialog.openError(Display.getCurrent().getActiveShell(), "Initialize Diagram Denotation",
+							exception.getMessage());
+					exception.printStackTrace();
+				}
 
-		MessageDialog.openInformation(Display.getCurrent().getActiveShell(), "Initialize Diagram Denotation",
-				"Initialization is complete.");
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				IEditorDescriptor descriptor = PlatformUI.getWorkbench().getEditorRegistry()
+						.getDefaultEditor(fileDenotation.getName());
+				try {
+					page.openEditor(new FileEditorInput(fileDenotation), descriptor.getId());
+				} catch (CoreException exception) {
+					MessageDialog.openError(Display.getCurrent().getActiveShell(), "Initialize Diagram Denotation",
+							exception.getMessage());
+					exception.printStackTrace();
+				}
+
+				MessageDialog.openInformation(Display.getCurrent().getActiveShell(), "Initialize Diagram Denotation",
+						"Initialization is complete.");
+			}
+		});
 	}
 }
