@@ -30,6 +30,10 @@ import org.eclipse.jface.viewers.IStructuredSelection;
  */
 public class DenotationPropertyTester extends PropertyTester {
 	/**
+	 * The IsPhrase property
+	 */
+	public static final String IS_PHRASE = "IsPhrase";
+	/**
 	 * The IsPhraseOrDenotation property
 	 */
 	public static final String IS_PHRASE_OR_DENOTATION = "IsPhraseOrDenotation";
@@ -44,7 +48,17 @@ public class DenotationPropertyTester extends PropertyTester {
 
 	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		if (IS_PHRASE_OR_DENOTATION.equals(property) && receiver instanceof IStructuredSelection) {
+		if (IS_PHRASE.equals(property) && receiver instanceof IStructuredSelection) {
+			if (((IStructuredSelection) receiver).size() != 1)
+				return false;
+			Object selected = ((IStructuredSelection) receiver).getFirstElement();
+			if (selected == null)
+				return false;
+			if (!(selected instanceof IFile))
+				return false;
+			IFile file = (IFile) selected;
+			return file.getName().endsWith(Constants.FILE_PHRASE);
+		} else if (IS_PHRASE_OR_DENOTATION.equals(property) && receiver instanceof IStructuredSelection) {
 			if (((IStructuredSelection) receiver).size() != 1)
 				return false;
 			Object selected = ((IStructuredSelection) receiver).getFirstElement();

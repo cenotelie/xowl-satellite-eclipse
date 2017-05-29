@@ -34,6 +34,7 @@ public class PhraseEditor extends TextEditor {
 		super();
 		setSourceViewerConfiguration(new HimeEditorConfiguration(new PhraseScanner()));
 		setDocumentProvider(new FileDocumentProvider());
+		setEditorContextMenuId(PhraseEditor.class.getCanonicalName());
 	}
 
 	@Override

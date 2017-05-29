@@ -54,6 +54,35 @@
                   </with>
                </visibleWhen>
             </command>
+            <command
+                  commandId="org.xowl.satellites.eclipse.denotation.editors.PhraseEditor.Format"
+                  label="Format Phrase"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <with
+                        variable="selection">
+                     <test
+                           forcePluginActivation="true"
+                           property="org.xowl.satellites.eclipse.denotation.properties.IsPhrase">
+                     </test>
+                  </with>
+               </visibleWhen>
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:org.xowl.satellites.eclipse.denotation.editors.PhraseEditor?after=additions">
+         <menu
+               icon="platform:/plugin/org.xowl.satellites.eclipse.preferences/resources/icons/xowl-16.png"
+               id="org.xowl.satellites.eclipse.denotation.editors.PhraseEditor.menu"
+               label="xOWL">
+            <command
+                  commandId="org.xowl.satellites.eclipse.denotation.editors.PhraseEditor.Format"
+                  label="Format Phrase"
+                  style="push">
+            </command>
          </menu>
       </menuContribution>
    </extension>
@@ -63,7 +92,7 @@
             class="org.xowl.satellites.eclipse.denotation.DenotationPropertyTester"
             id="org.xowl.satellites.eclipse.denotation.PropertyTester"
             namespace="org.xowl.satellites.eclipse.denotation.properties"
-            properties="IsPhraseOrDenotation,IsMeaning,IsGmfNotationElement"
+            properties="IsPhrase,IsPhraseOrDenotation,IsMeaning,IsGmfNotationElement"
             type="org.eclipse.jface.viewers.IStructuredSelection">
       </propertyTester>
    </extension>
@@ -86,6 +115,12 @@
             defaultHandler="org.xowl.satellites.eclipse.denotation.CommandShareMeaningHandler"
             id="org.xowl.satellites.eclipse.denotation.CommandShareMeaning"
             name="Share Meaning">
+      </command>
+      <command
+            categoryId="org.xowl.satellites.eclipse.denotation.CommandCategory"
+            defaultHandler="org.xowl.satellites.eclipse.denotation.FormatPhraseHandler"
+            id="org.xowl.satellites.eclipse.denotation.editors.PhraseEditor.Format"
+            name="Format Phrase">
       </command>
       <category
             id="org.xowl.satellites.eclipse.denotation.CommandCategory"
