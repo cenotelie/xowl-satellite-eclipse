@@ -29,65 +29,68 @@ grammar xRDF : SPARQL
                                             | NEW_LINE ) ;
         fragment SYMBOL_CHAR        -> SYMBOL_CHAR_FIRST | [0-9] | '^' | '\'' | '#' | '~' | '@' | '%' ;
         fragment SYMBOL_ELEM        -> SYMBOL_CHAR_FIRST SYMBOL_CHAR* (':' SYMBOL_CHAR+)* ;
-
-        CLJ_SYMBOL              -> '.' | '/' |  SYMBOL_ELEM ('/' SYMBOL_ELEM)? ;
-        CLJ_KEYWORD             -> ':' ':'? ((SYMBOL_CHAR_FIRST | [0-9]) SYMBOL_CHAR* (':' SYMBOL_CHAR+)*) ('/' ((SYMBOL_CHAR_FIRST | [0-9]) SYMBOL_CHAR* (':' SYMBOL_CHAR+)*))? ':'? ;
-        LITERAL_STRING          -> '"'  ( (. - ('"' | '\\'))
-                                            | '\\' ('\'' | '"' | '\\' | [btnfr])
-                                            | '\\' [0-7]
-                                            | '\\' [0-7] [0-7]
-                                            | '\\' [0-3] [0-7] [0-7]
-                                            | '\\' [u] [a-fA-F0-9] [a-fA-F0-9] [a-fA-F0-9] [a-fA-F0-9]
-                                        )* '"' ;
-        LITERAL_CHAR            -> '\\' ( (. - NEW_LINE)
-                                        | 'newline'
-                                        | 'space'
-                                        | 'tab'
-                                        | 'formfeed'
-                                        | 'backspace'
-                                        | 'return'
-                                        | 'o' [0-7]
-                                        | 'o' [0-7] [0-7]
-                                        | 'o' [0-3] [0-7] [0-7]
-                                        | [u] [a-fA-F0-9] [a-fA-F0-9] [a-fA-F0-9] [a-fA-F0-9]
-                                    ) ;
-        LITERAL_NIL             -> 'nil' ;
-        LITERAL_TRUE            -> 'true' ;
-        LITERAL_FALSE           -> 'false' ;
-        LITERAL_INTEGER         -> ('+'|'-')?
-                                    (     '0'
-                                        | [1-9] [0-9]*
-                                        | '0' [xX] [0-9A-Fa-f]+
-                                        | '0' [0-7]+
-                                        | [1-9] [0-9]? [rR] [0-9A-Za-z]+
-                                        | '0' [0-9]+
-                                    )
-                                    'N'? ;
-        LITERAL_RATIO           -> ('+'|'-')? [0-9]+ '/' [0-9]+ ;
-        LITERAL_FLOAT           -> ('+'|'-')? [0-9]+
-                                    ( '.' [0-9]* )?
-                                    ( [eE] ('+'|'-')? [0-9]+ )?
-                                    'M'? ;
-        LITERAL_ARGUMENT        -> '%' ([0-9]+ | '&')? ;
-        CLJ_LP                  -> '(' ;
-        CLJ_RP                  -> ')' ;
-        CLJ_LB                  -> '[' ;
-        CLJ_RB                  -> ']' ;
-        CLJ_LC                  -> '{' ;
-        CLJ_RC                  -> '}' ;
-        CLJ_DISPATCH            -> '#' ;
-        CLJ_SET_SEPARATOR       -> ',' ;
-        CLJ_QUOTE               -> '\'' ;
-        CLJ_DEREF               -> '@' ;
-        CLJ_METADATA            -> '^' ;
-        CLJ_IGNORE              -> '#_' ;
-        CLJ_SYNTAX_QUOTE        -> '`' ;
-        CLJ_UNQUOTE             -> '~' ;
-        CLJ_UNQUOTE_SPLICE      -> '~@' ;
-        CLJ_CONDITIONAL         -> '#?' '@'? ;
-
-        XOWL_OPAQUE_EXP         -> '$';
-
+        context clojure
+        {
+            CLJ_SYMBOL              -> '.' | '/' |  SYMBOL_ELEM ('/' SYMBOL_ELEM)? ;
+            CLJ_KEYWORD             -> ':' ':'? ((SYMBOL_CHAR_FIRST | [0-9]) SYMBOL_CHAR* (':' SYMBOL_CHAR+)*) ('/' ((SYMBOL_CHAR_FIRST | [0-9]) SYMBOL_CHAR* (':' SYMBOL_CHAR+)*))? ':'? ;
+            LITERAL_STRING          -> '"'  ( (. - ('"' | '\\'))
+                                                | '\\' ('\'' | '"' | '\\' | [btnfr])
+                                                | '\\' [0-7]
+                                                | '\\' [0-7] [0-7]
+                                                | '\\' [0-3] [0-7] [0-7]
+                                                | '\\' [u] [a-fA-F0-9] [a-fA-F0-9] [a-fA-F0-9] [a-fA-F0-9]
+                                            )* '"' ;
+            LITERAL_CHAR            -> '\\' ( (. - NEW_LINE)
+                                            | 'newline'
+                                            | 'space'
+                                            | 'tab'
+                                            | 'formfeed'
+                                            | 'backspace'
+                                            | 'return'
+                                            | 'o' [0-7]
+                                            | 'o' [0-7] [0-7]
+                                            | 'o' [0-3] [0-7] [0-7]
+                                            | [u] [a-fA-F0-9] [a-fA-F0-9] [a-fA-F0-9] [a-fA-F0-9]
+                                        ) ;
+            LITERAL_NIL             -> 'nil' ;
+            LITERAL_TRUE            -> 'true' ;
+            LITERAL_FALSE           -> 'false' ;
+            LITERAL_INTEGER         -> ('+'|'-')?
+                                        (     '0'
+                                            | [1-9] [0-9]*
+                                            | '0' [xX] [0-9A-Fa-f]+
+                                            | '0' [0-7]+
+                                            | [1-9] [0-9]? [rR] [0-9A-Za-z]+
+                                            | '0' [0-9]+
+                                        )
+                                        'N'? ;
+            LITERAL_RATIO           -> ('+'|'-')? [0-9]+ '/' [0-9]+ ;
+            LITERAL_FLOAT           -> ('+'|'-')? [0-9]+
+                                        ( '.' [0-9]* )?
+                                        ( [eE] ('+'|'-')? [0-9]+ )?
+                                        'M'? ;
+            LITERAL_ARGUMENT        -> '%' ([0-9]+ | '&')? ;
+            CLJ_LP                  -> '(' ;
+            CLJ_RP                  -> ')' ;
+            CLJ_LB                  -> '[' ;
+            CLJ_RB                  -> ']' ;
+            CLJ_LC                  -> '{' ;
+            CLJ_RC                  -> '}' ;
+            CLJ_DISPATCH            -> '#' ;
+            CLJ_SET_SEPARATOR       -> ',' ;
+            CLJ_QUOTE               -> '\'' ;
+            CLJ_DEREF               -> '@' ;
+            CLJ_METADATA            -> '^' ;
+            CLJ_IGNORE              -> '#_' ;
+            CLJ_SYNTAX_QUOTE        -> '`' ;
+            CLJ_UNQUOTE             -> '~' ;
+            CLJ_UNQUOTE_SPLICE      -> '~@' ;
+            CLJ_CONDITIONAL         -> '#?' '@'? ;
+        }
+        context xowl
+        {
+            XOWL_OPAQUE_EXP         -> '$';
+        }
         RULE                        -> ~'rule';
         META                        -> ~'meta';
     }
@@ -112,7 +115,7 @@ grammar xRDF : SPARQL
         xowl_graph_node             -> iri^ | blank_node^ | VARIABLE^ | xowl_dynamic^ ;
         xowl_blank_property_list    -> '['! xowl_predicate_object_list^ ']'! ;
         xowl_collection             -> '('! xowl_object* ')'! ;
-        xowl_dynamic                -> XOWL_OPAQUE_EXP^ clj_form ;
+        xowl_dynamic                -> #xowl { XOWL_OPAQUE_EXP^ } #clojure{ clj_form } ;
 
         xowl_rule                   -> xowl_rule_simple^ | xowl_rule_sparql^ ;
         xowl_rule_simple            -> RULE xowl_rule_mod iri '{'! xowl_rule_parts '}'! xowl_rule_guard '=>'! '{'! xowl_rule_parts '}' ;
@@ -122,7 +125,7 @@ grammar xRDF : SPARQL
         xowl_rule_part              -> xowl_data
                                         | META NOT? xowl_data
                                         | NOT META? xowl_data ;
-        xowl_rule_guard             -> (WITH! clj_form )? ;
+        xowl_rule_guard             -> (WITH! #clojure{ clj_form })? ;
 
 
         /*

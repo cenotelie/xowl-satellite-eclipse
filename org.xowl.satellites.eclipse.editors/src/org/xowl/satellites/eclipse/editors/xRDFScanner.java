@@ -21,6 +21,8 @@ import org.eclipse.swt.custom.StyleRange;
 
 import fr.cenotelie.hime.redist.Token;
 import fr.cenotelie.hime.redist.TokenRepository;
+import fr.cenotelie.hime.redist.lexer.IContextProvider;
+import fr.cenotelie.hime.redist.lexer.TokenKernel;
 
 /**
  * Implements a scanner for the xRDF syntax
@@ -28,6 +30,31 @@ import fr.cenotelie.hime.redist.TokenRepository;
  * @author Laurent Wouters
  */
 public class xRDFScanner extends HimePresentationRepairer {
+	/**
+	 * The filtering lexer that filters out the COMMENT for the parser
+	 *
+	 * @author Laurent Wouters
+	 */
+	private static class FilteringLexer extends xRDFLexer {
+		/**
+		 * Initializes this lexer
+		 * 
+		 * @param input
+		 *            The lexer's input
+		 */
+		public FilteringLexer(String input) {
+			super(input);
+		}
+
+		@Override
+		public TokenKernel getNextToken(IContextProvider contexts) {
+			TokenKernel kernel = super.getNextToken(contexts);
+			while (kernel.getTerminalID() == xRDFLexer.ID.COMMENT)
+				kernel = super.getNextToken(contexts);
+			return kernel;
+		}
+	}
+
 	/**
 	 * The color of keywords
 	 */
@@ -66,10 +93,10 @@ public class xRDFScanner extends HimePresentationRepairer {
 
 	@Override
 	protected TokenRepository doParse(String input) {
-		xRDFLexer lexer = new xRDFLexer(input);
-		lexer.setErrorHandler(this);
-		// trigger the full lexing
-		lexer.getNextToken();
+		xRDFLexer lexer = new FilteringLexer(input);
+		xRDFParser parser = new xRDFParser(lexer);
+		// parses the input
+		parser.parse();
 		return lexer.getTokens();
 	}
 
@@ -131,6 +158,7 @@ public class xRDFScanner extends HimePresentationRepairer {
 		case xRDFLexer.ID.SEPARATOR:
 		case xRDFLexer.ID.RULE:
 		case xRDFLexer.ID.META:
+		case xRDFLexer.ID.CLJ_KEYWORD:
 			return doCreateStyle(token, KEYWORD_COLOR);
 		case xRDFLexer.ID.INTEGER:
 		case xRDFLexer.ID.DECIMAL:
@@ -141,6 +169,15 @@ public class xRDFScanner extends HimePresentationRepairer {
 		case xRDFLexer.ID.STRING_LITERAL_LONG_QUOTE:
 		case xRDFLexer.ID.TRUE:
 		case xRDFLexer.ID.FALSE:
+		case xRDFLexer.ID.LITERAL_STRING:
+		case xRDFLexer.ID.LITERAL_CHAR:
+		case xRDFLexer.ID.LITERAL_NIL:
+		case xRDFLexer.ID.LITERAL_TRUE:
+		case xRDFLexer.ID.LITERAL_FALSE:
+		case xRDFLexer.ID.LITERAL_INTEGER:
+		case xRDFLexer.ID.LITERAL_RATIO:
+		case xRDFLexer.ID.LITERAL_FLOAT:
+		case xRDFLexer.ID.LITERAL_ARGUMENT:
 			return doCreateStyle(token, LITERAL_COLOR);
 		case xRDFLexer.ID.IRIREF:
 			return doCreateStyle(token, IRI_COLOR);
