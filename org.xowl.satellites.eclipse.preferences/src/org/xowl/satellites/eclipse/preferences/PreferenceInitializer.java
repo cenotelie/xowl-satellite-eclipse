@@ -26,17 +26,17 @@ import org.eclipse.jface.preference.IPreferenceStore;
  * @author Laurent Wouters
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#
-	 * initializeDefaultPreferences()
-	 */
-	@Override
-	public void initializeDefaultPreferences() {
-		final IPreferenceStore store = new SecurePreferencesStore(PreferenceConstants.XOWL_SECURE_NODE);
-		store.setDefault(PreferenceConstants.XOWL_EP_KEY, PreferenceConstants.XOWL_EP_VALUE);
-		store.setDefault(PreferenceConstants.XOWL_LOGIN_KEY, "");
-		store.setDefault(PreferenceConstants.XOWL_PASSWORD_KEY, "");
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#
+     * initializeDefaultPreferences()
+     */
+    @Override
+    public void initializeDefaultPreferences() {
+        final IPreferenceStore store = new SecurePreferencesStore(PreferenceConstants.XOWL_SECURE_NODE);
+        store.setDefault(PreferenceConstants.XOWL_EP_KEY, PreferenceConstants.XOWL_EP_VALUE);
+        store.setDefault(PreferenceConstants.XOWL_LOGIN_KEY, "");
+        store.setDefault(PreferenceConstants.XOWL_PASSWORD_KEY, "");
+    }
 }

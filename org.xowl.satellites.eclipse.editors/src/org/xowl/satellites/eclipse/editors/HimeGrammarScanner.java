@@ -17,10 +17,9 @@
 
 package org.xowl.satellites.eclipse.editors;
 
-import org.eclipse.swt.custom.StyleRange;
-
 import fr.cenotelie.hime.redist.Token;
 import fr.cenotelie.hime.redist.TokenRepository;
+import org.eclipse.swt.custom.StyleRange;
 
 /**
  * Implements a scanner for the Hime Grammar syntax
@@ -28,51 +27,51 @@ import fr.cenotelie.hime.redist.TokenRepository;
  * @author Laurent Wouters
  */
 public class HimeGrammarScanner extends HimePresentationRepairer {
-	/**
-	 * The color of keywords
-	 */
-	private static final int KEYWORD_COLOR = 0x000000FF;
-	/**
-	 * The color of comment
-	 */
-	private static final int COMMENT_COLOR = 0x00006400;
-	/**
-	 * The color of literals
-	 */
-	private static final int LITERAL_COLOR = 0x008A2BE2;
+    /**
+     * The color of keywords
+     */
+    private static final int KEYWORD_COLOR = 0x000000FF;
+    /**
+     * The color of comment
+     */
+    private static final int COMMENT_COLOR = 0x00006400;
+    /**
+     * The color of literals
+     */
+    private static final int LITERAL_COLOR = 0x008A2BE2;
 
-	/**
-	 * Initializes this scanner
-	 */
-	public HimeGrammarScanner() {
-		super();
-	}
+    /**
+     * Initializes this scanner
+     */
+    public HimeGrammarScanner() {
+        super();
+    }
 
-	@Override
-	protected TokenRepository doParse(String input) {
-		HimeGrammarLexer lexer = new HimeGrammarLexer(input);
-		lexer.setErrorHandler(this);
-		// trigger the full lexing
-		lexer.getNextToken();
-		return lexer.getTokens();
-	}
+    @Override
+    protected TokenRepository doParse(String input) {
+        HimeGrammarLexer lexer = new HimeGrammarLexer(input);
+        lexer.setErrorHandler(this);
+        // trigger the full lexing
+        lexer.getNextToken();
+        return lexer.getTokens();
+    }
 
-	@Override
-	protected StyleRange doStyle(Token token) {
-		switch (token.getSymbol().getID()) {
-		case HimeGrammarLexer.ID.COMMENT_LINE:
-		case HimeGrammarLexer.ID.COMMENT_BLOCK:
-			return doCreateStyle(token, COMMENT_COLOR);
-		case HimeGrammarLexer.ID.BLOCK_GRAMMAR:
-		case HimeGrammarLexer.ID.BLOCK_OPTIONS:
-		case HimeGrammarLexer.ID.BLOCK_TERMINALS:
-		case HimeGrammarLexer.ID.BLOCK_RULES:
-		case HimeGrammarLexer.ID.BLOCK_CONTEXT:
-		case HimeGrammarLexer.ID.FRAGMENT:
-			return doCreateStyle(token, KEYWORD_COLOR);
-		case HimeGrammarLexer.ID.LITERAL_TEXT:
-			return doCreateStyle(token, LITERAL_COLOR);
-		}
-		return null;
-	}
+    @Override
+    protected StyleRange doStyle(Token token) {
+        switch (token.getSymbol().getID()) {
+            case HimeGrammarLexer.ID.COMMENT_LINE:
+            case HimeGrammarLexer.ID.COMMENT_BLOCK:
+                return doCreateStyle(token, COMMENT_COLOR);
+            case HimeGrammarLexer.ID.BLOCK_GRAMMAR:
+            case HimeGrammarLexer.ID.BLOCK_OPTIONS:
+            case HimeGrammarLexer.ID.BLOCK_TERMINALS:
+            case HimeGrammarLexer.ID.BLOCK_RULES:
+            case HimeGrammarLexer.ID.BLOCK_CONTEXT:
+            case HimeGrammarLexer.ID.FRAGMENT:
+                return doCreateStyle(token, KEYWORD_COLOR);
+            case HimeGrammarLexer.ID.LITERAL_TEXT:
+                return doCreateStyle(token, LITERAL_COLOR);
+        }
+        return null;
+    }
 }

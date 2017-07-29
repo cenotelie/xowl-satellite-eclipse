@@ -17,95 +17,93 @@
 
 package org.xowl.satellites.eclipse.editors;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 /**
  * Manages the translation of RGB color into Eclipse color
- * 
+ *
  * @author Laurent Wouters
  */
 public class ColorManager {
-	/**
-	 * The singleton instance
-	 */
-	private static final ColorManager INSTANCE = new ColorManager();
+    /**
+     * The singleton instance
+     */
+    private static final ColorManager INSTANCE = new ColorManager();
 
-	/**
-	 * Gets the color manager
-	 * 
-	 * @return The color manager
-	 */
-	public static ColorManager get() {
-		return INSTANCE;
-	}
+    /**
+     * Gets the color manager
+     *
+     * @return The color manager
+     */
+    public static ColorManager get() {
+        return INSTANCE;
+    }
 
-	/**
-	 * Initializes the color manager
-	 */
-	private ColorManager() {
-		this.colorTableRGB = new HashMap<>();
-		this.colorTableInt = new HashMap<>();
-	}
+    /**
+     * Initializes the color manager
+     */
+    private ColorManager() {
+        this.colorTableRGB = new HashMap<>();
+        this.colorTableInt = new HashMap<>();
+    }
 
-	/**
-	 * The map of known colors
-	 */
-	private final Map<RGB, Color> colorTableRGB;
-	/**
-	 * The map of known colors
-	 */
-	private final Map<Integer, Color> colorTableInt;
+    /**
+     * The map of known colors
+     */
+    private final Map<RGB, Color> colorTableRGB;
+    /**
+     * The map of known colors
+     */
+    private final Map<Integer, Color> colorTableInt;
 
-	/**
-	 * Disposes of this resource
-	 */
-	public void dispose() {
-		Iterator<Color> e = colorTableRGB.values().iterator();
-		while (e.hasNext())
-			((Color) e.next()).dispose();
-		e = colorTableInt.values().iterator();
-		while (e.hasNext())
-			((Color) e.next()).dispose();
-	}
+    /**
+     * Disposes of this resource
+     */
+    public void dispose() {
+        Iterator<Color> e = colorTableRGB.values().iterator();
+        while (e.hasNext())
+            ((Color) e.next()).dispose();
+        e = colorTableInt.values().iterator();
+        while (e.hasNext())
+            ((Color) e.next()).dispose();
+    }
 
-	/**
-	 * Gets a color for the specified rgb definition
-	 * 
-	 * @param rgb
-	 *            An RGB definition
-	 * @return The corresponding color
-	 */
-	public Color getColor(RGB rgb) {
-		Color color = (Color) colorTableRGB.get(rgb);
-		if (color == null) {
-			color = new Color(Display.getCurrent(), rgb);
-			colorTableRGB.put(rgb, color);
-		}
-		return color;
-	}
+    /**
+     * Gets a color for the specified rgb definition
+     *
+     * @param rgb An RGB definition
+     * @return The corresponding color
+     */
+    public Color getColor(RGB rgb) {
+        Color color = (Color) colorTableRGB.get(rgb);
+        if (color == null) {
+            color = new Color(Display.getCurrent(), rgb);
+            colorTableRGB.put(rgb, color);
+        }
+        return color;
+    }
 
-	/**
-	 * Gets a color for the specified rgb definition
-	 * 
-	 * @param rgb
-	 *            An RGB definition
-	 * @return The corresponding color
-	 */
-	public Color getColor(int rgb) {
-		Color color = (Color) colorTableInt.get(rgb);
-		if (color == null) {
-			int red = ((rgb & 0x00FF0000) >> 16);
-			int green = ((rgb & 0x0000FF00) >> 8);
-			int blue = (rgb & 0x000000FF);
-			color = new Color(Display.getCurrent(), red, green, blue);
-			colorTableInt.put(rgb, color);
-		}
-		return color;
-	}
+    /**
+     * Gets a color for the specified rgb definition
+     *
+     * @param rgb An RGB definition
+     * @return The corresponding color
+     */
+    public Color getColor(int rgb) {
+        Color color = (Color) colorTableInt.get(rgb);
+        if (color == null) {
+            int red = ((rgb & 0x00FF0000) >> 16);
+            int green = ((rgb & 0x0000FF00) >> 8);
+            int blue = (rgb & 0x000000FF);
+            color = new Color(Display.getCurrent(), red, green, blue);
+            colorTableInt.put(rgb, color);
+        }
+        return color;
+    }
 }

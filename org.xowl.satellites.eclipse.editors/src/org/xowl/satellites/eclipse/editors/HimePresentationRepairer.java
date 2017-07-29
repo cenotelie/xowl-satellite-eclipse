@@ -17,6 +17,11 @@
 
 package org.xowl.satellites.eclipse.editors;
 
+import fr.cenotelie.hime.redist.ParseError;
+import fr.cenotelie.hime.redist.TextSpan;
+import fr.cenotelie.hime.redist.Token;
+import fr.cenotelie.hime.redist.TokenRepository;
+import fr.cenotelie.hime.redist.lexer.LexicalErrorHandler;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.TextPresentation;
@@ -24,89 +29,77 @@ import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.RGB;
 
-import fr.cenotelie.hime.redist.ParseError;
-import fr.cenotelie.hime.redist.TextSpan;
-import fr.cenotelie.hime.redist.Token;
-import fr.cenotelie.hime.redist.TokenRepository;
-import fr.cenotelie.hime.redist.lexer.LexicalErrorHandler;
-
 /**
  * A presentation repairer that uses Hime
- * 
+ *
  * @author Laurent Wouters
  */
 public abstract class HimePresentationRepairer implements IPresentationRepairer, LexicalErrorHandler {
-	/**
-	 * The current document
-	 */
-	protected IDocument document;
+    /**
+     * The current document
+     */
+    protected IDocument document;
 
-	@Override
-	public void setDocument(IDocument document) {
-		this.document = document;
-	}
+    @Override
+    public void setDocument(IDocument document) {
+        this.document = document;
+    }
 
-	@Override
-	public void createPresentation(TextPresentation presentation, ITypedRegion damage) {
-		presentation.clear();
-		TokenRepository tokens = doParse(document.get());
-		if (tokens == null)
-			return;
-		for (Token token : tokens) {
-			StyleRange styleRange = doStyle(token);
-			if (styleRange != null)
-				presentation.addStyleRange(styleRange);
-		}
-	}
+    @Override
+    public void createPresentation(TextPresentation presentation, ITypedRegion damage) {
+        presentation.clear();
+        TokenRepository tokens = doParse(document.get());
+        if (tokens == null)
+            return;
+        for (Token token : tokens) {
+            StyleRange styleRange = doStyle(token);
+            if (styleRange != null)
+                presentation.addStyleRange(styleRange);
+        }
+    }
 
-	@Override
-	public void handle(ParseError error) {
-		// do nothing
-	}
+    @Override
+    public void handle(ParseError error) {
+        // do nothing
+    }
 
-	/**
-	 * Parses the specified input
-	 * 
-	 * @param input
-	 *            The input to parse
-	 * @return The token repository
-	 */
-	protected abstract TokenRepository doParse(String input);
+    /**
+     * Parses the specified input
+     *
+     * @param input The input to parse
+     * @return The token repository
+     */
+    protected abstract TokenRepository doParse(String input);
 
-	/**
-	 * Gets the style for the specified token
-	 * 
-	 * @param token
-	 *            A token
-	 * @return The style, or null if no style applies
-	 */
-	protected abstract StyleRange doStyle(Token token);
+    /**
+     * Gets the style for the specified token
+     *
+     * @param token A token
+     * @return The style, or null if no style applies
+     */
+    protected abstract StyleRange doStyle(Token token);
 
-	/**
-	 * Creates a style range for the specified token
-	 * 
-	 * @param token
-	 *            The token
-	 * @param color
-	 *            The color for the token
-	 * @return The style range
-	 */
-	protected StyleRange doCreateStyle(Token token, RGB color) {
-		TextSpan span = token.getSpan();
-		return new StyleRange(span.getIndex(), span.getLength(), ColorManager.get().getColor(color), null);
-	}
+    /**
+     * Creates a style range for the specified token
+     *
+     * @param token The token
+     * @param color The color for the token
+     * @return The style range
+     */
+    protected StyleRange doCreateStyle(Token token, RGB color) {
+        TextSpan span = token.getSpan();
+        return new StyleRange(span.getIndex(), span.getLength(), ColorManager.get().getColor(color), null);
+    }
 
-	/**
-	 * Creates a style range for the specified token
-	 * 
-	 * @param token
-	 *            The token
-	 * @param color
-	 *            The color for the token
-	 * @return The style range
-	 */
-	protected StyleRange doCreateStyle(Token token, int color) {
-		TextSpan span = token.getSpan();
-		return new StyleRange(span.getIndex(), span.getLength(), ColorManager.get().getColor(color), null);
-	}
+    /**
+     * Creates a style range for the specified token
+     *
+     * @param token The token
+     * @param color The color for the token
+     * @return The style range
+     */
+    protected StyleRange doCreateStyle(Token token, int color) {
+        TextSpan span = token.getSpan();
+        return new StyleRange(span.getIndex(), span.getLength(), ColorManager.get().getColor(color), null);
+    }
 }

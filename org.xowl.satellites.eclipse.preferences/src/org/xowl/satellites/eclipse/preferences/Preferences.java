@@ -21,50 +21,50 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * API for the access to the xOWL preferences
- * 
+ *
  * @author Laurent Wouters
  */
 public class Preferences {
-	/**
-	 * The backing preference store
-	 */
-	private static IPreferenceStore store;
+    /**
+     * The backing preference store
+     */
+    private static IPreferenceStore store;
 
-	/**
-	 * Gets the preference store
-	 * 
-	 * @return The preference store
-	 */
-	public static synchronized IPreferenceStore getStore() {
-		if (store == null)
-			store = new SecurePreferencesStore(PreferenceConstants.XOWL_SECURE_NODE);
-		return store;
-	}
+    /**
+     * Gets the preference store
+     *
+     * @return The preference store
+     */
+    public static synchronized IPreferenceStore getStore() {
+        if (store == null)
+            store = new SecurePreferencesStore(PreferenceConstants.XOWL_SECURE_NODE);
+        return store;
+    }
 
-	/**
-	 * Gets the configured API endpoint
-	 * 
-	 * @return The configured API endpoint
-	 */
-	public static String getApiEndpoint() {
-		return getStore().getString(PreferenceConstants.XOWL_EP_KEY);
-	}
+    /**
+     * Gets the configured API endpoint
+     *
+     * @return The configured API endpoint
+     */
+    public static String getApiEndpoint() {
+        return getStore().getString(PreferenceConstants.XOWL_EP_KEY);
+    }
 
-	/**
-	 * Gets the configured login
-	 * 
-	 * @return The configured login
-	 */
-	public static String getLogin() {
-		return getStore().getString(PreferenceConstants.XOWL_LOGIN_KEY);
-	}
+    /**
+     * Gets the configured login
+     *
+     * @return The configured login
+     */
+    public static String getLogin() {
+        return getStore().getString(PreferenceConstants.XOWL_LOGIN_KEY);
+    }
 
-	/**
-	 * Gets the configured password
-	 * 
-	 * @return The configured password
-	 */
-	public static String getPassword() {
-		return getStore().getString(PreferenceConstants.XOWL_PASSWORD_KEY);
-	}
+    /**
+     * Gets the configured password
+     *
+     * @return The configured password
+     */
+    public static String getPassword() {
+        return getStore().getString(PreferenceConstants.XOWL_PASSWORD_KEY);
+    }
 }

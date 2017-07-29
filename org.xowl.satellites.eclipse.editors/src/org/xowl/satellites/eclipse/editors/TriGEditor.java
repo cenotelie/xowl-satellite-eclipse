@@ -22,16 +22,16 @@ import org.eclipse.ui.editors.text.TextEditor;
 
 /**
  * The editor for the TriG syntax
- * 
+ *
  * @author Laurent Wouters
  */
 public class TriGEditor extends TextEditor {
-	/**
-	 * Initializes this editor
-	 */
-	public TriGEditor() {
-		super();
-		setSourceViewerConfiguration(new HimeEditorConfiguration(new TriGScanner()));
-		setDocumentProvider(new FileDocumentProvider());
-	}
+    /**
+     * Initializes this editor
+     */
+    public TriGEditor() {
+        super();
+        setSourceViewerConfiguration(new HimeEditorConfiguration(new TriGScanner()));
+        setDocumentProvider(new FileDocumentProvider());
+    }
 }

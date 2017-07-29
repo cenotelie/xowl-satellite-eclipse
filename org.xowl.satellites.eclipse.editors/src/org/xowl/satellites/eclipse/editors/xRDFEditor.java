@@ -22,16 +22,16 @@ import org.eclipse.ui.editors.text.TextEditor;
 
 /**
  * The editor for the xRDF syntax
- * 
+ *
  * @author Laurent Wouters
  */
 public class xRDFEditor extends TextEditor {
-	/**
-	 * Initializes this editor
-	 */
-	public xRDFEditor() {
-		super();
-		setSourceViewerConfiguration(new HimeEditorConfiguration(new xRDFScanner()));
-		setDocumentProvider(new FileDocumentProvider());
-	}
+    /**
+     * Initializes this editor
+     */
+    public xRDFEditor() {
+        super();
+        setSourceViewerConfiguration(new HimeEditorConfiguration(new xRDFScanner()));
+        setDocumentProvider(new FileDocumentProvider());
+    }
 }

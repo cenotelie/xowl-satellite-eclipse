@@ -24,24 +24,24 @@ package org.xowl.satellites.eclipse.preferences;
  * @author Laurent Wouters
  */
 public interface PreferenceConstants {
-	/**
-	 * The part to the node in the secure storage
-	 */
-	String XOWL_SECURE_NODE = "/org.xowl.satellites.eclipse.preferences";
-	/**
-	 * The key for the API endpoint
-	 */
-	String XOWL_EP_KEY = "org.xowl.satellites.eclipse.preferences.endpoint";
-	/**
-	 * The user login to use on the platform
-	 */
-	String XOWL_LOGIN_KEY = "org.xowl.satellites.eclipse.preferences.login";
-	/**
-	 * The user password to use on the platform
-	 */
-	String XOWL_PASSWORD_KEY = "org.xowl.satellites.eclipse.preferences.password";
-	/**
-	 * The initial value for the API endpoint
-	 */
-	String XOWL_EP_VALUE = "https://localhost:8443/api/";
+    /**
+     * The part to the node in the secure storage
+     */
+    String XOWL_SECURE_NODE = "/org.xowl.satellites.eclipse.preferences";
+    /**
+     * The key for the API endpoint
+     */
+    String XOWL_EP_KEY = "org.xowl.satellites.eclipse.preferences.endpoint";
+    /**
+     * The user login to use on the platform
+     */
+    String XOWL_LOGIN_KEY = "org.xowl.satellites.eclipse.preferences.login";
+    /**
+     * The user password to use on the platform
+     */
+    String XOWL_PASSWORD_KEY = "org.xowl.satellites.eclipse.preferences.password";
+    /**
+     * The initial value for the API endpoint
+     */
+    String XOWL_EP_VALUE = "https://localhost:8443/api/";
 }

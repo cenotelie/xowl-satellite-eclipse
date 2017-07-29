@@ -30,52 +30,49 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
  * @author Laurent Wouters
  */
 public class PreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
-	/**
-	 * Initializes this preference page
-	 */
-	public PreferencePage() {
-		super(GRID);
-		setPreferenceStore(new SecurePreferencesStore(PreferenceConstants.XOWL_SECURE_NODE));
-	}
+    /**
+     * Initializes this preference page
+     */
+    public PreferencePage() {
+        super(GRID);
+        setPreferenceStore(new SecurePreferencesStore(PreferenceConstants.XOWL_SECURE_NODE));
+    }
 
-	/**
-	 * Initializes this preference page
-	 * 
-	 * @param title
-	 *            The title
-	 * @param image
-	 *            The image
-	 * @param style
-	 *            The style
-	 */
-	public PreferencePage(String title, ImageDescriptor image, int style) {
-		super(title, image, style);
-	}
+    /**
+     * Initializes this preference page
+     *
+     * @param title The title
+     * @param image The image
+     * @param style The style
+     */
+    public PreferencePage(String title, ImageDescriptor image, int style) {
+        super(title, image, style);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
-	 */
-	@Override
-	public void init(IWorkbench workbench) {
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
+     */
+    @Override
+    public void init(IWorkbench workbench) {
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.preference.FieldEditorPreferencePage#createFieldEditors
-	 * ()
-	 */
-	@Override
-	protected void createFieldEditors() {
-		Composite parent = getFieldEditorParent();
-		addField(new StringFieldEditor(PreferenceConstants.XOWL_EP_KEY, "xOWL API endpoint", parent));
-		addField(new StringFieldEditor(PreferenceConstants.XOWL_LOGIN_KEY, "xOWL User login", parent));
-		StringFieldEditor fieldPassword = new StringFieldEditor(PreferenceConstants.XOWL_PASSWORD_KEY, "xOWL User password", parent);
-		addField(fieldPassword);
-		fieldPassword.getTextControl(parent).setEchoChar('*');
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.eclipse.jface.preference.FieldEditorPreferencePage#createFieldEditors
+     * ()
+     */
+    @Override
+    protected void createFieldEditors() {
+        Composite parent = getFieldEditorParent();
+        addField(new StringFieldEditor(PreferenceConstants.XOWL_EP_KEY, "xOWL API endpoint", parent));
+        addField(new StringFieldEditor(PreferenceConstants.XOWL_LOGIN_KEY, "xOWL User login", parent));
+        StringFieldEditor fieldPassword = new StringFieldEditor(PreferenceConstants.XOWL_PASSWORD_KEY, "xOWL User password", parent);
+        addField(fieldPassword);
+        fieldPassword.getTextControl(parent).setEchoChar('*');
+    }
 }

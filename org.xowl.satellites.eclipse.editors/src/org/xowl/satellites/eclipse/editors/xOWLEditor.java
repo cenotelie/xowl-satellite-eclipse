@@ -22,16 +22,16 @@ import org.eclipse.ui.editors.text.TextEditor;
 
 /**
  * The editor for the xOWL syntax
- * 
+ *
  * @author Laurent Wouters
  */
 public class xOWLEditor extends TextEditor {
-	/**
-	 * Initializes this editor
-	 */
-	public xOWLEditor() {
-		super();
-		setSourceViewerConfiguration(new HimeEditorConfiguration(new xOWLScanner()));
-		setDocumentProvider(new FileDocumentProvider());
-	}
+    /**
+     * Initializes this editor
+     */
+    public xOWLEditor() {
+        super();
+        setSourceViewerConfiguration(new HimeEditorConfiguration(new xOWLScanner()));
+        setDocumentProvider(new FileDocumentProvider());
+    }
 }

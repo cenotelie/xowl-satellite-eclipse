@@ -22,16 +22,16 @@ import org.eclipse.ui.editors.text.TextEditor;
 
 /**
  * The editor for the Functional OWL2 syntax
- * 
+ *
  * @author Laurent Wouters
  */
 public class FunctionalOWL2Editor extends TextEditor {
-	/**
-	 * Initializes this editor
-	 */
-	public FunctionalOWL2Editor() {
-		super();
-		setSourceViewerConfiguration(new HimeEditorConfiguration(new FunctionalOWL2Scanner()));
-		setDocumentProvider(new FileDocumentProvider());
-	}
+    /**
+     * Initializes this editor
+     */
+    public FunctionalOWL2Editor() {
+        super();
+        setSourceViewerConfiguration(new HimeEditorConfiguration(new FunctionalOWL2Scanner()));
+        setDocumentProvider(new FileDocumentProvider());
+    }
 }

@@ -22,16 +22,16 @@ import org.eclipse.ui.editors.text.TextEditor;
 
 /**
  * The editor for the Hime Grammar syntax
- * 
+ *
  * @author Laurent Wouters
  */
 public class HimeGrammarEditor extends TextEditor {
-	/**
-	 * Initializes this editor
-	 */
-	public HimeGrammarEditor() {
-		super();
-		setSourceViewerConfiguration(new HimeEditorConfiguration(new HimeGrammarScanner()));
-		setDocumentProvider(new FileDocumentProvider());
-	}
+    /**
+     * Initializes this editor
+     */
+    public HimeGrammarEditor() {
+        super();
+        setSourceViewerConfiguration(new HimeEditorConfiguration(new HimeGrammarScanner()));
+        setDocumentProvider(new FileDocumentProvider());
+    }
 }

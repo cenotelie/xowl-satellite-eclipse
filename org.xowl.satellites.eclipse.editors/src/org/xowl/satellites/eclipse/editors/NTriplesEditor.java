@@ -22,16 +22,16 @@ import org.eclipse.ui.editors.text.TextEditor;
 
 /**
  * The editor for the N-Triples syntax
- * 
+ *
  * @author Laurent Wouters
  */
 public class NTriplesEditor extends TextEditor {
-	/**
-	 * Initializes this editor
-	 */
-	public NTriplesEditor() {
-		super();
-		setSourceViewerConfiguration(new HimeEditorConfiguration(new NTriplesScanner()));
-		setDocumentProvider(new FileDocumentProvider());
-	}
+    /**
+     * Initializes this editor
+     */
+    public NTriplesEditor() {
+        super();
+        setSourceViewerConfiguration(new HimeEditorConfiguration(new NTriplesScanner()));
+        setDocumentProvider(new FileDocumentProvider());
+    }
 }

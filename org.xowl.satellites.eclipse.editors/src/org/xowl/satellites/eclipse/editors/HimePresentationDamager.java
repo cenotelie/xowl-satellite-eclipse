@@ -17,32 +17,28 @@
 
 package org.xowl.satellites.eclipse.editors;
 
-import org.eclipse.jface.text.DocumentEvent;
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.ITypedRegion;
-import org.eclipse.jface.text.TypedRegion;
+import org.eclipse.jface.text.*;
 import org.eclipse.jface.text.presentation.IPresentationDamager;
 
 /**
  * A presentation damager that damages the whole document, forcing the document
  * to be re-parsed completely
- * 
+ *
  * @author Laurent Wouters
  */
 public class HimePresentationDamager implements IPresentationDamager {
-	/**
-	 * The current document
-	 */
-	protected IDocument document;
+    /**
+     * The current document
+     */
+    protected IDocument document;
 
-	@Override
-	public void setDocument(IDocument document) {
-		this.document = document;
-	}
+    @Override
+    public void setDocument(IDocument document) {
+        this.document = document;
+    }
 
-	@Override
-	public IRegion getDamageRegion(ITypedRegion partition, DocumentEvent event, boolean documentPartitioningChanged) {
-		return new TypedRegion(0, document.getLength(), IDocument.DEFAULT_CONTENT_TYPE);
-	}
+    @Override
+    public IRegion getDamageRegion(ITypedRegion partition, DocumentEvent event, boolean documentPartitioningChanged) {
+        return new TypedRegion(0, document.getLength(), IDocument.DEFAULT_CONTENT_TYPE);
+    }
 }

@@ -25,30 +25,29 @@ import org.eclipse.jface.text.source.SourceViewerConfiguration;
 
 /**
  * An editor configuration that uses Hime for the presentation
- * 
+ *
  * @author Laurent Wouters
  */
 public class HimeEditorConfiguration extends SourceViewerConfiguration {
-	/**
-	 * The presentation repairer to use
-	 */
-	private final HimePresentationRepairer repairer;
+    /**
+     * The presentation repairer to use
+     */
+    private final HimePresentationRepairer repairer;
 
-	/**
-	 * Initializes this configuration
-	 * 
-	 * @param repairer
-	 *            The repairer to use
-	 */
-	public HimeEditorConfiguration(HimePresentationRepairer repairer) {
-		this.repairer = repairer;
-	}
+    /**
+     * Initializes this configuration
+     *
+     * @param repairer The repairer to use
+     */
+    public HimeEditorConfiguration(HimePresentationRepairer repairer) {
+        this.repairer = repairer;
+    }
 
-	@Override
-	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
-		PresentationReconciler reconciler = new PresentationReconciler();
-		reconciler.setDamager(new HimePresentationDamager(), IDocument.DEFAULT_CONTENT_TYPE);
-		reconciler.setRepairer(repairer, IDocument.DEFAULT_CONTENT_TYPE);
-		return reconciler;
-	}
+    @Override
+    public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
+        PresentationReconciler reconciler = new PresentationReconciler();
+        reconciler.setDamager(new HimePresentationDamager(), IDocument.DEFAULT_CONTENT_TYPE);
+        reconciler.setRepairer(repairer, IDocument.DEFAULT_CONTENT_TYPE);
+        return reconciler;
+    }
 }

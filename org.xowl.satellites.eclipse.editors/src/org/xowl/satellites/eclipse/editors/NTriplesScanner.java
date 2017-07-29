@@ -17,10 +17,9 @@
 
 package org.xowl.satellites.eclipse.editors;
 
-import org.eclipse.swt.custom.StyleRange;
-
 import fr.cenotelie.hime.redist.Token;
 import fr.cenotelie.hime.redist.TokenRepository;
+import org.eclipse.swt.custom.StyleRange;
 
 /**
  * Implements a scanner for the N-Triples syntax
@@ -28,57 +27,57 @@ import fr.cenotelie.hime.redist.TokenRepository;
  * @author Laurent Wouters
  */
 public class NTriplesScanner extends HimePresentationRepairer {
-	/**
-	 * The color of comment
-	 */
-	private static final int COMMENT_COLOR = 0x00006400;
-	/**
-	 * The color of literals
-	 */
-	private static final int LITERAL_COLOR = 0x008A2BE2;
-	/**
-	 * The color of IRIs
-	 */
-	private static final int IRI_COLOR = 0x00DC143C;
-	/**
-	 * The color of blank nodes
-	 */
-	private static final int BLANK_COLOR = 0x002F4F4F;
-	/**
-	 * The color of lang tags
-	 */
-	private static final int LANGTAG_COLOR = 0x002F4F4F;
+    /**
+     * The color of comment
+     */
+    private static final int COMMENT_COLOR = 0x00006400;
+    /**
+     * The color of literals
+     */
+    private static final int LITERAL_COLOR = 0x008A2BE2;
+    /**
+     * The color of IRIs
+     */
+    private static final int IRI_COLOR = 0x00DC143C;
+    /**
+     * The color of blank nodes
+     */
+    private static final int BLANK_COLOR = 0x002F4F4F;
+    /**
+     * The color of lang tags
+     */
+    private static final int LANGTAG_COLOR = 0x002F4F4F;
 
-	/**
-	 * Initializes this scanner
-	 */
-	public NTriplesScanner() {
-		super();
-	}
+    /**
+     * Initializes this scanner
+     */
+    public NTriplesScanner() {
+        super();
+    }
 
-	@Override
-	protected TokenRepository doParse(String input) {
-		NTriplesLexer lexer = new NTriplesLexer(input);
-		lexer.setErrorHandler(this);
-		// trigger the full lexing
-		lexer.getNextToken();
-		return lexer.getTokens();
-	}
+    @Override
+    protected TokenRepository doParse(String input) {
+        NTriplesLexer lexer = new NTriplesLexer(input);
+        lexer.setErrorHandler(this);
+        // trigger the full lexing
+        lexer.getNextToken();
+        return lexer.getTokens();
+    }
 
-	@Override
-	protected StyleRange doStyle(Token token) {
-		switch (token.getSymbol().getID()) {
-		case NTriplesLexer.ID.COMMENT:
-			return doCreateStyle(token, COMMENT_COLOR);
-		case NTriplesLexer.ID.STRING_LITERAL_QUOTE:
-			return doCreateStyle(token, LITERAL_COLOR);
-		case NTriplesLexer.ID.IRIREF:
-			return doCreateStyle(token, IRI_COLOR);
-		case NTriplesLexer.ID.BLANK_NODE_LABEL:
-			return doCreateStyle(token, BLANK_COLOR);
-		case NTriplesLexer.ID.LANGTAG:
-			return doCreateStyle(token, LANGTAG_COLOR);
-		}
-		return null;
-	}
+    @Override
+    protected StyleRange doStyle(Token token) {
+        switch (token.getSymbol().getID()) {
+            case NTriplesLexer.ID.COMMENT:
+                return doCreateStyle(token, COMMENT_COLOR);
+            case NTriplesLexer.ID.STRING_LITERAL_QUOTE:
+                return doCreateStyle(token, LITERAL_COLOR);
+            case NTriplesLexer.ID.IRIREF:
+                return doCreateStyle(token, IRI_COLOR);
+            case NTriplesLexer.ID.BLANK_NODE_LABEL:
+                return doCreateStyle(token, BLANK_COLOR);
+            case NTriplesLexer.ID.LANGTAG:
+                return doCreateStyle(token, LANGTAG_COLOR);
+        }
+        return null;
+    }
 }

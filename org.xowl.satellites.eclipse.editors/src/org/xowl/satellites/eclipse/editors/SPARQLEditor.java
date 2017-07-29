@@ -22,16 +22,16 @@ import org.eclipse.ui.editors.text.TextEditor;
 
 /**
  * The editor for the SPARQL syntax
- * 
+ *
  * @author Laurent Wouters
  */
 public class SPARQLEditor extends TextEditor {
-	/**
-	 * Initializes this editor
-	 */
-	public SPARQLEditor() {
-		super();
-		setSourceViewerConfiguration(new HimeEditorConfiguration(new SPARQLScanner()));
-		setDocumentProvider(new FileDocumentProvider());
-	}
+    /**
+     * Initializes this editor
+     */
+    public SPARQLEditor() {
+        super();
+        setSourceViewerConfiguration(new HimeEditorConfiguration(new SPARQLScanner()));
+        setDocumentProvider(new FileDocumentProvider());
+    }
 }

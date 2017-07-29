@@ -22,16 +22,16 @@ import org.eclipse.ui.editors.text.TextEditor;
 
 /**
  * The editor for the Turtle syntax
- * 
+ *
  * @author Laurent Wouters
  */
 public class TurtleEditor extends TextEditor {
-	/**
-	 * Initializes this editor
-	 */
-	public TurtleEditor() {
-		super();
-		setSourceViewerConfiguration(new HimeEditorConfiguration(new TurtleScanner()));
-		setDocumentProvider(new FileDocumentProvider());
-	}
+    /**
+     * Initializes this editor
+     */
+    public TurtleEditor() {
+        super();
+        setSourceViewerConfiguration(new HimeEditorConfiguration(new TurtleScanner()));
+        setDocumentProvider(new FileDocumentProvider());
+    }
 }
