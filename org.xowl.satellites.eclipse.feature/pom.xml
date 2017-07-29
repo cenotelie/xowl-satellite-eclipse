@@ -77,6 +77,8 @@
                         <plugin id="fr.cenotelie.hime.redist"/>
                         <plugin id="org.xowl.infra.xowl-commons"/>
                         <plugin id="org.xowl.infra.xowl-lang"/>
+                        <plugin id="org.xowl.infra.xowl-jsonrpc"/>
+                        <plugin id="org.xowl.infra.xowl-lsp"/>
                         <plugin id="org.xowl.infra.xowl-store"/>
                         <plugin id="org.xowl.infra.xowl-denotation"/>
                         <plugin id="org.xowl.infra.xowl-server-api"/>
