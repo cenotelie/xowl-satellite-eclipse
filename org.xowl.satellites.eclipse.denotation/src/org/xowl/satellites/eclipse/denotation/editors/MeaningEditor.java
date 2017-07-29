@@ -25,8 +25,8 @@ import org.xowl.satellites.eclipse.editors.TriGEditor;
  * @author Laurent Wouters
  */
 public class MeaningEditor extends TriGEditor {
-	@Override
-	public boolean isEditable() {
-		return false;
-	}
+    @Override
+    public boolean isEditable() {
+        return false;
+    }
 }

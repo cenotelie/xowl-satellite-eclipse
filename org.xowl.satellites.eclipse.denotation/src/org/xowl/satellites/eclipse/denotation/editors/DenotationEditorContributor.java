@@ -26,13 +26,13 @@ import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
  * @author Laurent Wouters
  */
 public class DenotationEditorContributor extends MultiPageEditorActionBarContributor {
-	/**
-	 * Initializes this contributor
-	 */
-	public DenotationEditorContributor() {
-	}
+    /**
+     * Initializes this contributor
+     */
+    public DenotationEditorContributor() {
+    }
 
-	@Override
-	public void setActivePage(IEditorPart activeEditor) {
-	}
+    @Override
+    public void setActivePage(IEditorPart activeEditor) {
+    }
 }

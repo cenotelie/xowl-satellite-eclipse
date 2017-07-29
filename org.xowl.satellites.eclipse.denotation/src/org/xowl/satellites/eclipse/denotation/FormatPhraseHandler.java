@@ -36,45 +36,44 @@ import org.xowl.satellites.eclipse.denotation.editors.PhraseEditor;
  * @author Laurent Wouters
  */
 public class FormatPhraseHandler extends AbstractHandler {
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IStructuredSelection selection = HandlerUtil.getCurrentStructuredSelection(event);
-		if (selection.size() == 1) {
-			Object selected = selection.getFirstElement();
-			if (selected == null)
-				return null;
-			if (selected instanceof IFile) {
-				formatPhraseFile((IFile) selected);
-				return null;
-			}
-		}
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        IStructuredSelection selection = HandlerUtil.getCurrentStructuredSelection(event);
+        if (selection.size() == 1) {
+            Object selected = selection.getFirstElement();
+            if (selected == null)
+                return null;
+            if (selected instanceof IFile) {
+                formatPhraseFile((IFile) selected);
+                return null;
+            }
+        }
 
-		IEditorPart editor = HandlerUtil.getActiveEditor(event);
-		if (editor instanceof DenotationEditor) {
-			DenotationEditor denotationEditor = (DenotationEditor) editor;
-			Object object = denotationEditor.getSelectedPage();
-			if (object instanceof PhraseEditor) {
-				FileEditorInput input = ((FileEditorInput) ((PhraseEditor) object).getEditorInput());
-				formatPhraseFile(input.getFile());
-				return null;
-			}
+        IEditorPart editor = HandlerUtil.getActiveEditor(event);
+        if (editor instanceof DenotationEditor) {
+            DenotationEditor denotationEditor = (DenotationEditor) editor;
+            Object object = denotationEditor.getSelectedPage();
+            if (object instanceof PhraseEditor) {
+                FileEditorInput input = ((FileEditorInput) ((PhraseEditor) object).getEditorInput());
+                formatPhraseFile(input.getFile());
+                return null;
+            }
 
-		}
-		return null;
-	}
+        }
+        return null;
+    }
 
-	/**
-	 * Format the content of the specified phrase file
-	 * 
-	 * @param file
-	 *            The file
-	 */
-	private void formatPhraseFile(IFile file) {
-		if (file == null)
-			return;
-		if (!file.getName().endsWith(Constants.FILE_PHRASE))
-			return;
-		Runnable action = new FormatJsonFile(file);
-		Display.getDefault().asyncExec(action);
-	}
+    /**
+     * Format the content of the specified phrase file
+     *
+     * @param file The file
+     */
+    private void formatPhraseFile(IFile file) {
+        if (file == null)
+            return;
+        if (!file.getName().endsWith(Constants.FILE_PHRASE))
+            return;
+        Runnable action = new FormatJsonFile(file);
+        Display.getDefault().asyncExec(action);
+    }
 }

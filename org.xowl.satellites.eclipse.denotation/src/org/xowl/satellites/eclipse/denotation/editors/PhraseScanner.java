@@ -17,12 +17,11 @@
 
 package org.xowl.satellites.eclipse.denotation.editors;
 
-import org.eclipse.swt.custom.StyleRange;
-import org.xowl.infra.store.loaders.JsonLexer;
-import org.xowl.satellites.eclipse.editors.HimePresentationRepairer;
-
 import fr.cenotelie.hime.redist.Token;
 import fr.cenotelie.hime.redist.TokenRepository;
+import org.eclipse.swt.custom.StyleRange;
+import org.xowl.infra.utils.json.JsonLexer;
+import org.xowl.satellites.eclipse.editors.HimePresentationRepairer;
 
 /**
  * Implements a scanner for the syntax of a phrase file
@@ -30,50 +29,50 @@ import fr.cenotelie.hime.redist.TokenRepository;
  * @author Laurent Wouters
  */
 public class PhraseScanner extends HimePresentationRepairer {
-	/**
-	 * The color of comment
-	 */
-	private static final int COMMENT_COLOR = 0x00006400;
-	/**
-	 * The color of literals
-	 */
-	private static final int LITERAL_COLOR = 0x008A2BE2;
-	/**
-	 * The color of literal string
-	 */
-	private static final int LITERAL_STRING = 0x000000FF;
+    /**
+     * The color of comment
+     */
+    private static final int COMMENT_COLOR = 0x00006400;
+    /**
+     * The color of literals
+     */
+    private static final int LITERAL_COLOR = 0x008A2BE2;
+    /**
+     * The color of literal string
+     */
+    private static final int LITERAL_STRING = 0x000000FF;
 
-	/**
-	 * Initializes this scanner
-	 */
-	public PhraseScanner() {
-		super();
-	}
+    /**
+     * Initializes this scanner
+     */
+    public PhraseScanner() {
+        super();
+    }
 
-	@Override
-	protected TokenRepository doParse(String input) {
-		JsonLexer lexer = new JsonLexer(input);
-		lexer.setErrorHandler(this);
-		// trigger the full lexing
-		lexer.getNextToken();
-		return lexer.getTokens();
-	}
+    @Override
+    protected TokenRepository doParse(String input) {
+        JsonLexer lexer = new JsonLexer(input);
+        lexer.setErrorHandler(this);
+        // trigger the full lexing
+        lexer.getNextToken();
+        return lexer.getTokens();
+    }
 
-	@Override
-	protected StyleRange doStyle(Token token) {
-		switch (token.getSymbol().getID()) {
-		case JsonLexer.ID.COMMENT:
-			return doCreateStyle(token, COMMENT_COLOR);
-		case JsonLexer.ID.LITERAL_NULL:
-		case JsonLexer.ID.LITERAL_TRUE:
-		case JsonLexer.ID.LITERAL_FALSE:
-		case JsonLexer.ID.LITERAL_INTEGER:
-		case JsonLexer.ID.LITERAL_DECIMAL:
-		case JsonLexer.ID.LITERAL_DOUBLE:
-			return doCreateStyle(token, LITERAL_COLOR);
-		case JsonLexer.ID.LITERAL_STRING:
-			return doCreateStyle(token, LITERAL_STRING);
-		}
-		return null;
-	}
+    @Override
+    protected StyleRange doStyle(Token token) {
+        switch (token.getSymbol().getID()) {
+            case JsonLexer.ID.COMMENT:
+                return doCreateStyle(token, COMMENT_COLOR);
+            case JsonLexer.ID.LITERAL_NULL:
+            case JsonLexer.ID.LITERAL_TRUE:
+            case JsonLexer.ID.LITERAL_FALSE:
+            case JsonLexer.ID.LITERAL_INTEGER:
+            case JsonLexer.ID.LITERAL_DECIMAL:
+            case JsonLexer.ID.LITERAL_DOUBLE:
+                return doCreateStyle(token, LITERAL_COLOR);
+            case JsonLexer.ID.LITERAL_STRING:
+                return doCreateStyle(token, LITERAL_STRING);
+        }
+        return null;
+    }
 }

@@ -23,22 +23,22 @@ import org.xowl.satellites.eclipse.editors.HimeEditorConfiguration;
 
 /**
  * The editor for a phrase file
- * 
+ *
  * @author Laurent Wouters
  */
 public class PhraseEditor extends TextEditor {
-	/**
-	 * Initializes this editor
-	 */
-	public PhraseEditor() {
-		super();
-		setSourceViewerConfiguration(new HimeEditorConfiguration(new PhraseScanner()));
-		setDocumentProvider(new FileDocumentProvider());
-		setEditorContextMenuId(PhraseEditor.class.getCanonicalName());
-	}
+    /**
+     * Initializes this editor
+     */
+    public PhraseEditor() {
+        super();
+        setSourceViewerConfiguration(new HimeEditorConfiguration(new PhraseScanner()));
+        setDocumentProvider(new FileDocumentProvider());
+        setEditorContextMenuId(PhraseEditor.class.getCanonicalName());
+    }
 
-	@Override
-	public boolean isEditable() {
-		return false;
-	}
+    @Override
+    public boolean isEditable() {
+        return false;
+    }
 }

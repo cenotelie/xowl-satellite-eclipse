@@ -27,52 +27,51 @@ import org.xowl.satellites.eclipse.denotation.actions.ShareMeaning;
 
 /**
  * A wizard to share meaning
- * 
+ *
  * @author Laurent Wouters
  */
 public class ShareMeaningWizard extends Wizard implements INewWizard {
-	/**
-	 * The first wizard page
-	 */
-	private ShareMeaningWizardPage page1;
-	/**
-	 * The file with the meaning to share
-	 */
-	private final IFile fileInput;
+    /**
+     * The first wizard page
+     */
+    private ShareMeaningWizardPage page1;
+    /**
+     * The file with the meaning to share
+     */
+    private final IFile fileInput;
 
-	/**
-	 * Constructor for this wizard.
-	 * 
-	 * @param fileInput
-	 *            The file with the meaning to share
-	 */
-	public ShareMeaningWizard(IFile fileInput) {
-		super();
-		setNeedsProgressMonitor(true);
-		setWindowTitle("Share Meaning - Wizard");
-		this.fileInput = fileInput;
-	}
+    /**
+     * Constructor for this wizard.
+     *
+     * @param fileInput The file with the meaning to share
+     */
+    public ShareMeaningWizard(IFile fileInput) {
+        super();
+        setNeedsProgressMonitor(true);
+        setWindowTitle("Share Meaning - Wizard");
+        this.fileInput = fileInput;
+    }
 
-	@Override
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-	}
+    @Override
+    public void init(IWorkbench workbench, IStructuredSelection selection) {
+    }
 
-	@Override
-	public void addPages() {
-		page1 = new ShareMeaningWizardPage(fileInput);
-		addPage(page1);
-	}
+    @Override
+    public void addPages() {
+        page1 = new ShareMeaningWizardPage(fileInput);
+        addPage(page1);
+    }
 
-	@Override
-	public boolean performFinish() {
-		try {
-			ShareMeaning action = new ShareMeaning(fileInput, page1.getArtifactName(), page1.getArtifactBase(),
-					page1.getArtifactVersion(), page1.getArtifactArchetype());
-			Display.getDefault().asyncExec(action);
-		} catch (Exception exception) {
-			exception.printStackTrace();
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean performFinish() {
+        try {
+            ShareMeaning action = new ShareMeaning(fileInput, page1.getArtifactName(), page1.getArtifactBase(),
+                    page1.getArtifactVersion(), page1.getArtifactArchetype());
+            Display.getDefault().asyncExec(action);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

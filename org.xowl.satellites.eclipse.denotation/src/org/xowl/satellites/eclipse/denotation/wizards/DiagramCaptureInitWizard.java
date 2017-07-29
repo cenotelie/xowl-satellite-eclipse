@@ -35,69 +35,67 @@ import org.xowl.satellites.eclipse.denotation.actions.InitializeDiagramDenotatio
 
 /**
  * A wizard to initialize the capture of the denotation of a diagram
- * 
+ *
  * @author Laurent Wouters
  */
 public class DiagramCaptureInitWizard extends Wizard implements INewWizard {
-	/**
-	 * The first wizard page
-	 */
-	private DiagramCaptureInitWizardPage page1;
-	/**
-	 * The diagram to capture
-	 */
-	private final Diagram diagram;
+    /**
+     * The first wizard page
+     */
+    private DiagramCaptureInitWizardPage page1;
+    /**
+     * The diagram to capture
+     */
+    private final Diagram diagram;
 
-	/**
-	 * Constructor for this wizard.
-	 */
-	public DiagramCaptureInitWizard(Diagram diagram) {
-		super();
-		setNeedsProgressMonitor(true);
-		setWindowTitle("Capture Diagram Meaning - Wizard");
-		this.diagram = diagram;
-	}
+    /**
+     * Constructor for this wizard.
+     */
+    public DiagramCaptureInitWizard(Diagram diagram) {
+        super();
+        setNeedsProgressMonitor(true);
+        setWindowTitle("Capture Diagram Meaning - Wizard");
+        this.diagram = diagram;
+    }
 
-	@Override
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-	}
+    @Override
+    public void init(IWorkbench workbench, IStructuredSelection selection) {
+    }
 
-	@Override
-	public void addPages() {
-		page1 = new DiagramCaptureInitWizardPage(diagram);
-		addPage(page1);
-	}
+    @Override
+    public void addPages() {
+        page1 = new DiagramCaptureInitWizardPage(diagram);
+        addPage(page1);
+    }
 
-	@Override
-	public boolean performFinish() {
-		try {
-			final String containerName = page1.getContainerName();
-			final String fileName = page1.getFileName();
-			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			IResource resource = root.findMember(new Path(containerName));
-			if (!resource.exists() || !(resource instanceof IContainer)) {
-				throwCoreException("Container \"" + containerName + "\" does not exist.");
-			}
-			IContainer container = (IContainer) resource;
-			InitializeDiagramDenotation action = new InitializeDiagramDenotation(diagram, container, fileName);
-			Display.getDefault().asyncExec(action);
-		} catch (CoreException exception) {
-			exception.printStackTrace();
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean performFinish() {
+        try {
+            final String containerName = page1.getContainerName();
+            final String fileName = page1.getFileName();
+            IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+            IResource resource = root.findMember(new Path(containerName));
+            if (!resource.exists() || !(resource instanceof IContainer)) {
+                throwCoreException("Container \"" + containerName + "\" does not exist.");
+            }
+            IContainer container = (IContainer) resource;
+            InitializeDiagramDenotation action = new InitializeDiagramDenotation(diagram, container, fileName);
+            Display.getDefault().asyncExec(action);
+        } catch (CoreException exception) {
+            exception.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 
-	/**
-	 * Throws a core exception
-	 * 
-	 * @param message
-	 *            The message's exception
-	 * @throws CoreException
-	 *             The exception
-	 */
-	private void throwCoreException(String message) throws CoreException {
-		IStatus status = new Status(IStatus.ERROR, "org.xowl.satellites.eclipse.denotation", IStatus.OK, message, null);
-		throw new CoreException(status);
-	}
+    /**
+     * Throws a core exception
+     *
+     * @param message The message's exception
+     * @throws CoreException The exception
+     */
+    private void throwCoreException(String message) throws CoreException {
+        IStatus status = new Status(IStatus.ERROR, "org.xowl.satellites.eclipse.denotation", IStatus.OK, message, null);
+        throw new CoreException(status);
+    }
 }

@@ -25,72 +25,72 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 
 /**
  * Implements a property tester for this plugin
- * 
+ *
  * @author Laurent Wouters
  */
 public class DenotationPropertyTester extends PropertyTester {
-	/**
-	 * The IsPhrase property
-	 */
-	public static final String IS_PHRASE = "IsPhrase";
-	/**
-	 * The IsPhraseOrDenotation property
-	 */
-	public static final String IS_PHRASE_OR_DENOTATION = "IsPhraseOrDenotation";
-	/**
-	 * The IsMeaning property
-	 */
-	public static final String IS_MEANING = "IsMeaning";
-	/**
-	 * The IsGmfNotationElement property
-	 */
-	public static final String IS_GMF_NOTATION_ELEMENT = "IsGmfNotationElement";
+    /**
+     * The IsPhrase property
+     */
+    public static final String IS_PHRASE = "IsPhrase";
+    /**
+     * The IsPhraseOrDenotation property
+     */
+    public static final String IS_PHRASE_OR_DENOTATION = "IsPhraseOrDenotation";
+    /**
+     * The IsMeaning property
+     */
+    public static final String IS_MEANING = "IsMeaning";
+    /**
+     * The IsGmfNotationElement property
+     */
+    public static final String IS_GMF_NOTATION_ELEMENT = "IsGmfNotationElement";
 
-	@Override
-	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		if (IS_PHRASE.equals(property) && receiver instanceof IStructuredSelection) {
-			if (((IStructuredSelection) receiver).size() != 1)
-				return false;
-			Object selected = ((IStructuredSelection) receiver).getFirstElement();
-			if (selected == null)
-				return false;
-			if (!(selected instanceof IFile))
-				return false;
-			IFile file = (IFile) selected;
-			return file.getName().endsWith(Constants.FILE_PHRASE);
-		} else if (IS_PHRASE_OR_DENOTATION.equals(property) && receiver instanceof IStructuredSelection) {
-			if (((IStructuredSelection) receiver).size() != 1)
-				return false;
-			Object selected = ((IStructuredSelection) receiver).getFirstElement();
-			if (selected == null)
-				return false;
-			if (!(selected instanceof IFile))
-				return false;
-			IFile file = (IFile) selected;
-			return (file.getName().endsWith(Constants.FILE_PHRASE)
-					|| file.getName().endsWith(Constants.FILE_DENOTATION));
-		} else if (IS_MEANING.equals(property) && receiver instanceof IStructuredSelection) {
-			if (((IStructuredSelection) receiver).size() != 1)
-				return false;
-			Object selected = ((IStructuredSelection) receiver).getFirstElement();
-			if (selected == null)
-				return false;
-			if (!(selected instanceof IFile))
-				return false;
-			IFile file = (IFile) selected;
-			return file.getName().endsWith(Constants.FILE_MEANING);
-		} else if (IS_GMF_NOTATION_ELEMENT.equals(property) && receiver instanceof IStructuredSelection) {
-			if (((IStructuredSelection) receiver).size() != 1)
-				return false;
-			Object selected = ((IStructuredSelection) receiver).getFirstElement();
-			if (selected == null)
-				return false;
-			if (selected instanceof Diagram)
-				return true;
-			if (selected instanceof EditPart) {
-				return ((EditPart) selected).getModel() instanceof Diagram;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
+        if (IS_PHRASE.equals(property) && receiver instanceof IStructuredSelection) {
+            if (((IStructuredSelection) receiver).size() != 1)
+                return false;
+            Object selected = ((IStructuredSelection) receiver).getFirstElement();
+            if (selected == null)
+                return false;
+            if (!(selected instanceof IFile))
+                return false;
+            IFile file = (IFile) selected;
+            return file.getName().endsWith(Constants.FILE_PHRASE);
+        } else if (IS_PHRASE_OR_DENOTATION.equals(property) && receiver instanceof IStructuredSelection) {
+            if (((IStructuredSelection) receiver).size() != 1)
+                return false;
+            Object selected = ((IStructuredSelection) receiver).getFirstElement();
+            if (selected == null)
+                return false;
+            if (!(selected instanceof IFile))
+                return false;
+            IFile file = (IFile) selected;
+            return (file.getName().endsWith(Constants.FILE_PHRASE)
+                    || file.getName().endsWith(Constants.FILE_DENOTATION));
+        } else if (IS_MEANING.equals(property) && receiver instanceof IStructuredSelection) {
+            if (((IStructuredSelection) receiver).size() != 1)
+                return false;
+            Object selected = ((IStructuredSelection) receiver).getFirstElement();
+            if (selected == null)
+                return false;
+            if (!(selected instanceof IFile))
+                return false;
+            IFile file = (IFile) selected;
+            return file.getName().endsWith(Constants.FILE_MEANING);
+        } else if (IS_GMF_NOTATION_ELEMENT.equals(property) && receiver instanceof IStructuredSelection) {
+            if (((IStructuredSelection) receiver).size() != 1)
+                return false;
+            Object selected = ((IStructuredSelection) receiver).getFirstElement();
+            if (selected == null)
+                return false;
+            if (selected instanceof Diagram)
+                return true;
+            if (selected instanceof EditPart) {
+                return ((EditPart) selected).getModel() instanceof Diagram;
+            }
+        }
+        return false;
+    }
 }

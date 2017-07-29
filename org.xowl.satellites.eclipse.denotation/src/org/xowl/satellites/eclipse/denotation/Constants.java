@@ -22,48 +22,48 @@ import org.xowl.infra.store.Repository;
 
 /**
  * Defines some constants for the denotation capture
- * 
+ *
  * @author Laurent Wouters
  */
 public interface Constants {
-	/**
-	 * The file extension for a representation
-	 */
-	String FILE_REPRESENTATION = ".representation";
-	/**
-	 * The file extension for a phrase
-	 */
-	String FILE_PHRASE = ".phrase";
-	/**
-	 * The file extension for a denotation
-	 */
-	String FILE_DENOTATION = ".denotation";
-	/**
-	 * The file extension for a meaning
-	 */
-	String FILE_MEANING = Repository.SYNTAX_TRIG_EXTENSION;
-	/**
-	 * The syntax for a meaning file
-	 */
-	String MEANING_SYNTAX = Repository.SYNTAX_TRIG;
+    /**
+     * The file extension for a representation
+     */
+    String FILE_REPRESENTATION = ".representation";
+    /**
+     * The file extension for a phrase
+     */
+    String FILE_PHRASE = ".phrase";
+    /**
+     * The file extension for a denotation
+     */
+    String FILE_DENOTATION = ".denotation";
+    /**
+     * The file extension for a meaning
+     */
+    String FILE_MEANING = Repository.SYNTAX_TRIG_EXTENSION;
+    /**
+     * The syntax for a meaning file
+     */
+    String MEANING_SYNTAX = Repository.SYNTAX_TRIG;
 
-	/**
-	 * The from relation
-	 */
-	public static final SignRelation RELATION_FROM = new SignRelation("http://xowl.org/infra/denotation/schema#from",
-			"from");
-	/**
-	 * The to relation
-	 */
-	public static final SignRelation RELATION_TO = new SignRelation("http://xowl.org/infra/denotation/schema#to", "to");
-	/**
-	 * The next relation
-	 */
-	public static final SignRelation RELATION_NEXT = new SignRelation("http://xowl.org/infra/denotation/schema#next",
-			"next");
-	/**
-	 * The inDiagram relation
-	 */
-	public static final SignRelation RELATION_IN_DIAGRAM = new SignRelation("http://xowl.org/infra/denotation/schema#inDiagram",
-			"inDiagram");
+    /**
+     * The from relation
+     */
+    public static final SignRelation RELATION_FROM = new SignRelation("http://xowl.org/infra/denotation/schema#from",
+            "from");
+    /**
+     * The to relation
+     */
+    public static final SignRelation RELATION_TO = new SignRelation("http://xowl.org/infra/denotation/schema#to", "to");
+    /**
+     * The next relation
+     */
+    public static final SignRelation RELATION_NEXT = new SignRelation("http://xowl.org/infra/denotation/schema#next",
+            "next");
+    /**
+     * The inDiagram relation
+     */
+    public static final SignRelation RELATION_IN_DIAGRAM = new SignRelation("http://xowl.org/infra/denotation/schema#inDiagram",
+            "inDiagram");
 }

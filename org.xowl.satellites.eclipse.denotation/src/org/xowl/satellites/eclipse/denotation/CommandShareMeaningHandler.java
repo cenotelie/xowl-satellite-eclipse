@@ -34,22 +34,22 @@ import org.xowl.satellites.eclipse.denotation.wizards.ShareMeaningWizard;
  * @author Laurent Wouters
  */
 public class CommandShareMeaningHandler extends AbstractHandler {
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IStructuredSelection selection = HandlerUtil.getCurrentStructuredSelection(event);
-		if (selection.size() != 1)
-			return null;
-		Object selected = selection.getFirstElement();
-		if (selected == null)
-			return null;
-		if (!(selected instanceof IFile))
-			return null;
-		final IFile file = (IFile) selected;
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        IStructuredSelection selection = HandlerUtil.getCurrentStructuredSelection(event);
+        if (selection.size() != 1)
+            return null;
+        Object selected = selection.getFirstElement();
+        if (selected == null)
+            return null;
+        if (!(selected instanceof IFile))
+            return null;
+        final IFile file = (IFile) selected;
 
-		IWizard wizard = new ShareMeaningWizard(file);
-		WizardDialog dialog = new WizardDialog(Display.getCurrent().getActiveShell(), wizard);
-		dialog.setTitle(wizard.getWindowTitle());
-		dialog.open();
-		return null;
-	}
+        IWizard wizard = new ShareMeaningWizard(file);
+        WizardDialog dialog = new WizardDialog(Display.getCurrent().getActiveShell(), wizard);
+        dialog.setTitle(wizard.getWindowTitle());
+        dialog.open();
+        return null;
+    }
 }

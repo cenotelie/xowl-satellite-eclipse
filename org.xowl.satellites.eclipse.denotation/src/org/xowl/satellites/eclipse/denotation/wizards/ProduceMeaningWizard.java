@@ -30,55 +30,54 @@ import org.xowl.satellites.eclipse.denotation.actions.ProduceMeaning;
 
 /**
  * A wizard to produce the full meaning for a captured denotation
- * 
+ *
  * @author Laurent Wouters
  */
 public class ProduceMeaningWizard extends Wizard implements INewWizard {
-	/**
-	 * The first wizard page
-	 */
-	private ProduceMeaningWizardPage page1;
-	/**
-	 * The diagram to capture
-	 */
-	private final IFile fileInput;
+    /**
+     * The first wizard page
+     */
+    private ProduceMeaningWizardPage page1;
+    /**
+     * The diagram to capture
+     */
+    private final IFile fileInput;
 
-	/**
-	 * Constructor for this wizard.
-	 * 
-	 * @param fileInput
-	 *            The input file
-	 */
-	public ProduceMeaningWizard(IFile fileInput) {
-		super();
-		setNeedsProgressMonitor(true);
-		setWindowTitle("Produce Meaning - Wizard");
-		this.fileInput = fileInput;
-	}
+    /**
+     * Constructor for this wizard.
+     *
+     * @param fileInput The input file
+     */
+    public ProduceMeaningWizard(IFile fileInput) {
+        super();
+        setNeedsProgressMonitor(true);
+        setWindowTitle("Produce Meaning - Wizard");
+        this.fileInput = fileInput;
+    }
 
-	@Override
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-	}
+    @Override
+    public void init(IWorkbench workbench, IStructuredSelection selection) {
+    }
 
-	@Override
-	public void addPages() {
-		page1 = new ProduceMeaningWizardPage(fileInput);
-		addPage(page1);
-	}
+    @Override
+    public void addPages() {
+        page1 = new ProduceMeaningWizardPage(fileInput);
+        addPage(page1);
+    }
 
-	@Override
-	public boolean performFinish() {
-		try {
-			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			IFile filePhrase = root.getFile(new Path(page1.getFilePhrase()));
-			IFile fileDenotation = root.getFile(new Path(page1.getFileDenotation()));
-			IFile fileMeaning = root.getFile(new Path(page1.getFileMeaning()));
-			ProduceMeaning action = new ProduceMeaning(filePhrase, fileDenotation, fileMeaning, page1.getGraph());
-			Display.getDefault().asyncExec(action);
-		} catch (Exception exception) {
-			exception.printStackTrace();
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean performFinish() {
+        try {
+            IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+            IFile filePhrase = root.getFile(new Path(page1.getFilePhrase()));
+            IFile fileDenotation = root.getFile(new Path(page1.getFileDenotation()));
+            IFile fileMeaning = root.getFile(new Path(page1.getFileMeaning()));
+            ProduceMeaning action = new ProduceMeaning(filePhrase, fileDenotation, fileMeaning, page1.getGraph());
+            Display.getDefault().asyncExec(action);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

@@ -23,16 +23,16 @@ import org.xowl.satellites.eclipse.editors.HimeEditorConfiguration;
 
 /**
  * The editor a file with the denotation syntax
- * 
+ *
  * @author Laurent Wouters
  */
 public class DenotationFileEditor extends TextEditor {
-	/**
-	 * Initializes this editor
-	 */
-	public DenotationFileEditor() {
-		super();
-		setSourceViewerConfiguration(new HimeEditorConfiguration(new DenotationFileScanner()));
-		setDocumentProvider(new FileDocumentProvider());
-	}
+    /**
+     * Initializes this editor
+     */
+    public DenotationFileEditor() {
+        super();
+        setSourceViewerConfiguration(new HimeEditorConfiguration(new DenotationFileScanner()));
+        setDocumentProvider(new FileDocumentProvider());
+    }
 }

@@ -32,34 +32,34 @@ import org.xowl.satellites.eclipse.denotation.wizards.DiagramCaptureInitWizard;
 /**
  * Implements the handler for the command to capture the denotation of a
  * selected diagram
- * 
+ *
  * @author Laurent Wouters
  */
 public class CommandCaptureDiagramHandler extends AbstractHandler {
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IStructuredSelection selection = HandlerUtil.getCurrentStructuredSelection(event);
-		if (selection.size() != 1)
-			return null;
-		Object selected = selection.getFirstElement();
-		if (selected == null)
-			return null;
-		Diagram diagram = null;
-		if (selected instanceof Diagram) {
-			diagram = (Diagram) selected;
-		} else if (selected instanceof EditPart) {
-			Object model = ((EditPart) selected).getModel();
-			if (model instanceof Diagram) {
-				diagram = (Diagram) model;
-			}
-		}
-		if (diagram == null)
-			return null;
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        IStructuredSelection selection = HandlerUtil.getCurrentStructuredSelection(event);
+        if (selection.size() != 1)
+            return null;
+        Object selected = selection.getFirstElement();
+        if (selected == null)
+            return null;
+        Diagram diagram = null;
+        if (selected instanceof Diagram) {
+            diagram = (Diagram) selected;
+        } else if (selected instanceof EditPart) {
+            Object model = ((EditPart) selected).getModel();
+            if (model instanceof Diagram) {
+                diagram = (Diagram) model;
+            }
+        }
+        if (diagram == null)
+            return null;
 
-		IWizard wizard = new DiagramCaptureInitWizard(diagram);
-		WizardDialog dialog = new WizardDialog(Display.getCurrent().getActiveShell(), wizard);
-		dialog.setTitle(wizard.getWindowTitle());
-		dialog.open();
-		return null;
-	}
+        IWizard wizard = new DiagramCaptureInitWizard(diagram);
+        WizardDialog dialog = new WizardDialog(Display.getCurrent().getActiveShell(), wizard);
+        dialog.setTitle(wizard.getWindowTitle());
+        dialog.open();
+        return null;
+    }
 }
