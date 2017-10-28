@@ -13,38 +13,8 @@
     <dependencies>
         <dependency>
             <groupId>fr.cenotelie.hime</groupId>
-            <artifactId>hime-redist</artifactId>
-            <version>3.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.xowl.infra</groupId>
-            <artifactId>xowl-commons</artifactId>
-            <version>${xowlInfraVersion}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.xowl.infra</groupId>
-            <artifactId>xowl-lang</artifactId>
-            <version>${xowlInfraVersion}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.xowl.infra</groupId>
-            <artifactId>xowl-jsonrpc</artifactId>
-            <version>${xowlInfraVersion}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.xowl.infra</groupId>
-            <artifactId>xowl-lsp</artifactId>
-            <version>${xowlInfraVersion}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.xowl.infra</groupId>
-            <artifactId>xowl-store</artifactId>
-            <version>${xowlInfraVersion}</version>
+            <artifactId>hime-language-server</artifactId>
+            <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -75,14 +45,15 @@
                 <configuration>
                     <excludes>
                         <plugin id="fr.cenotelie.hime.redist"/>
-                        <plugin id="org.xowl.infra.xowl-commons"/>
+                        <plugin id="fr.cenotelie.commons.utils"/>
+                        <plugin id="fr.cenotelie.commons.jsonrpc"/>
+                        <plugin id="fr.cenotelie.commons.lsp"/>
                         <plugin id="org.xowl.infra.xowl-lang"/>
-                        <plugin id="org.xowl.infra.xowl-jsonrpc"/>
-                        <plugin id="org.xowl.infra.xowl-lsp"/>
                         <plugin id="org.xowl.infra.xowl-store"/>
                         <plugin id="org.xowl.infra.xowl-denotation"/>
                         <plugin id="org.xowl.infra.xowl-server-api"/>
                         <plugin id="org.xowl.platform.xowl-kernel"/>
+                        <feature id="fr.cenotelie.commons.feature"/>
                     </excludes>
                 </configuration>
                 <executions>

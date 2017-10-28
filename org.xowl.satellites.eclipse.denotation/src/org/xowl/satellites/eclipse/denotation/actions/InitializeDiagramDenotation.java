@@ -17,6 +17,7 @@
 
 package org.xowl.satellites.eclipse.denotation.actions;
 
+import fr.cenotelie.commons.utils.IOUtils;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -33,7 +34,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.xowl.infra.denotation.phrases.Phrase;
-import org.xowl.infra.utils.IOUtils;
 import org.xowl.satellites.eclipse.denotation.Constants;
 import org.xowl.satellites.eclipse.denotation.parsers.GMFDiagramParser;
 

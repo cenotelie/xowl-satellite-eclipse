@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
+	<feature id="fr.cenotelie.commons.feature" url="features/fr.cenotelie.commons.feature_1.0.0.jar" version="1.0.0">
+		<category name="fr.cenotelie.commons.category"/>
+	</feature>
 	<feature id="org.xowl.satellites.eclipse.feature" url="features/org.xowl.satellites.eclipse.feature_0.1.0.qualifier.jar" version="0.1.0.qualifier">
 		<category name="org.xowl.satellites.eclipse.category"/>
 	</feature>
 	<feature id="org.xowl.satellites.eclipse.feature.source" url="features/org.xowl.satellites.eclipse.feature.source_0.1.0.qualifier.jar" version="0.1.0.qualifier">
 		<category name="org.xowl.satellites.eclipse.category"/>
 	</feature>
+	<category-def label="Cénotélie Commons" name="fr.cenotelie.commons.category">
+		<description>The repository of Eclipse plugins and features for Cénotélie Commons in Eclipse.</description>
+	</category-def>
 	<category-def label="xOWL Eclipse Satellite" name="org.xowl.satellites.eclipse.category">
 		<description>The repository of Eclipse plugins and features for xOWL satellites based on Eclipse.</description>
 	</category-def>

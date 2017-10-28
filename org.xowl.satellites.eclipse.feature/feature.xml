@@ -181,36 +181,10 @@
         Library.
     </license>
 
-    <plugin
-            id="fr.cenotelie.hime.redist"
-            download-size="0"
-            install-size="0"
-            version="0.0.0"
-            unpack="false"/>
-
-    <plugin
-            id="org.xowl.infra.xowl-commons"
-            download-size="0"
-            install-size="0"
-            version="0.0.0"
-            unpack="false"/>
+    <includes id="fr.cenotelie.commons.feature" version="0.0.0"/>
 
     <plugin
             id="org.xowl.infra.xowl-lang"
-            download-size="0"
-            install-size="0"
-            version="0.0.0"
-            unpack="false"/>
-
-    <plugin
-            id="org.xowl.infra.xowl-jsonrpc"
-            download-size="0"
-            install-size="0"
-            version="0.0.0"
-            unpack="false"/>
-
-    <plugin
-            id="org.xowl.infra.xowl-lsp"
             download-size="0"
             install-size="0"
             version="0.0.0"

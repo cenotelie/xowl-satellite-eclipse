@@ -17,10 +17,10 @@
 
 package org.xowl.satellites.eclipse.denotation.editors;
 
+import fr.cenotelie.commons.utils.json.JsonLexer;
 import fr.cenotelie.hime.redist.Token;
 import fr.cenotelie.hime.redist.TokenRepository;
 import org.eclipse.swt.custom.StyleRange;
-import org.xowl.infra.utils.json.JsonLexer;
 import org.xowl.satellites.eclipse.editors.HimePresentationRepairer;
 
 /**

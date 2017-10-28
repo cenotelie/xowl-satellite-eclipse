@@ -17,6 +17,10 @@
 
 package org.xowl.satellites.eclipse.denotation.actions;
 
+import fr.cenotelie.commons.utils.AutoReader;
+import fr.cenotelie.commons.utils.IOUtils;
+import fr.cenotelie.commons.utils.json.Json;
+import fr.cenotelie.commons.utils.logging.BufferedLogger;
 import fr.cenotelie.hime.redist.ASTNode;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -30,10 +34,6 @@ import org.xowl.infra.denotation.rules.DenotationRule;
 import org.xowl.infra.denotation.rules.DenotationRuleLoader;
 import org.xowl.infra.store.rdf.Quad;
 import org.xowl.infra.store.writers.TriGSerializer;
-import org.xowl.infra.utils.AutoReader;
-import org.xowl.infra.utils.IOUtils;
-import org.xowl.infra.utils.json.Json;
-import org.xowl.infra.utils.logging.BufferedLogger;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

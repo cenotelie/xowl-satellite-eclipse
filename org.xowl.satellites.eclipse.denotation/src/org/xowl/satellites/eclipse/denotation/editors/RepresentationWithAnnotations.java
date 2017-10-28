@@ -17,6 +17,7 @@
 
 package org.xowl.satellites.eclipse.denotation.editors;
 
+import fr.cenotelie.commons.utils.IOUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.gmf.runtime.draw2d.ui.render.awt.internal.svg.SVGImage;
@@ -29,7 +30,6 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.xowl.infra.utils.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

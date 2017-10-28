@@ -17,6 +17,12 @@
 
 package org.xowl.satellites.eclipse.denotation.actions;
 
+import fr.cenotelie.commons.utils.AutoReader;
+import fr.cenotelie.commons.utils.IOUtils;
+import fr.cenotelie.commons.utils.json.Json;
+import fr.cenotelie.commons.utils.json.JsonLexer;
+import fr.cenotelie.commons.utils.json.JsonParser;
+import fr.cenotelie.commons.utils.logging.BufferedLogger;
 import fr.cenotelie.hime.redist.ASTNode;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -24,12 +30,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
-import org.xowl.infra.utils.AutoReader;
-import org.xowl.infra.utils.IOUtils;
-import org.xowl.infra.utils.json.Json;
-import org.xowl.infra.utils.json.JsonLexer;
-import org.xowl.infra.utils.json.JsonParser;
-import org.xowl.infra.utils.logging.BufferedLogger;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

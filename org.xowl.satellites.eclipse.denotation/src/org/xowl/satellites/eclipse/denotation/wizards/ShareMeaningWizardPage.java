@@ -17,6 +17,7 @@
 
 package org.xowl.satellites.eclipse.denotation.wizards;
 
+import fr.cenotelie.commons.utils.http.URIUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -27,7 +28,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.xowl.infra.utils.http.URIUtils;
 import org.xowl.platform.kernel.artifacts.ArtifactArchetypeFree;
 
 /**

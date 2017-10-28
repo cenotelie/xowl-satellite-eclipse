@@ -17,16 +17,16 @@
 
 package org.xowl.satellites.eclipse.denotation.actions;
 
+import fr.cenotelie.commons.utils.IOUtils;
+import fr.cenotelie.commons.utils.api.Reply;
+import fr.cenotelie.commons.utils.http.HttpConstants;
+import fr.cenotelie.commons.utils.http.URIUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
-import org.xowl.infra.utils.IOUtils;
-import org.xowl.infra.utils.api.Reply;
-import org.xowl.infra.utils.http.HttpConstants;
-import org.xowl.infra.utils.http.URIUtils;
 import org.xowl.platform.kernel.remote.PlatformApiDeserializerForOSGi;
 import org.xowl.platform.kernel.remote.RemotePlatformAccess;
 import org.xowl.satellites.eclipse.denotation.Constants;

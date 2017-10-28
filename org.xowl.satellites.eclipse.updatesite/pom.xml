@@ -13,38 +13,8 @@
     <dependencies>
         <dependency>
             <groupId>fr.cenotelie.hime</groupId>
-            <artifactId>hime-redist</artifactId>
-            <version>3.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.xowl.infra</groupId>
-            <artifactId>xowl-commons</artifactId>
-            <version>${xowlInfraVersion}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.xowl.infra</groupId>
-            <artifactId>xowl-lang</artifactId>
-            <version>${xowlInfraVersion}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.xowl.infra</groupId>
-            <artifactId>xowl-jsonrpc</artifactId>
-            <version>${xowlInfraVersion}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.xowl.infra</groupId>
-            <artifactId>xowl-lsp</artifactId>
-            <version>${xowlInfraVersion}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.xowl.infra</groupId>
-            <artifactId>xowl-store</artifactId>
-            <version>${xowlInfraVersion}</version>
+            <artifactId>hime-language-server</artifactId>
+            <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
