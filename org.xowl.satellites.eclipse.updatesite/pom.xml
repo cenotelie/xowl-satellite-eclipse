@@ -12,12 +12,6 @@
     <description>The repository of Eclipse plugins and features for xOWL satellites based on Eclipse.</description>
     <dependencies>
         <dependency>
-            <groupId>fr.cenotelie.commons.eclipse</groupId>
-            <artifactId>fr.cenotelie.commons.feature</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>fr.cenotelie.hime</groupId>
             <artifactId>hime-language-server</artifactId>
             <version>1.0.0</version>
