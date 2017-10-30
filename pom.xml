@@ -34,7 +34,7 @@
     </scm>
     <distributionManagement>
         <snapshotRepository>
-            <id>cenotelie-snapshots</id>
+            <id>cenotelie</id>
             <url>https://nexus.cenotelie.fr/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
@@ -79,6 +79,11 @@
             <id>gmf-runtime</id>
             <layout>p2</layout>
             <url>${eclipseSite}/modeling/gmp/gmf-runtime/updates/releases/</url>
+        </repository>
+        <repository>
+            <id>cenotelie-commons</id>
+            <layout>p2</layout>
+            <url>https://nexus.cenotelie.fr/repository/raw/p2/cenotelie-commons/2.0.1/</url>
         </repository>
     </repositories>
     <modules>

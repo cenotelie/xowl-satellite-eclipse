@@ -14,7 +14,7 @@
         <dependency>
             <groupId>fr.cenotelie.hime</groupId>
             <artifactId>hime-language-server</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -42,6 +42,24 @@
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>tycho-p2-repository-plugin</artifactId>
                 <version>1.0.0</version>
+            </plugin>
+            <plugin>
+                <groupId>fr.cenotelie.commons</groupId>
+                <artifactId>p2-uploader-maven-plugin</artifactId>
+                <version>2.0.1</version>
+                <configuration>
+                    <serverId>cenotelie</serverId>
+                    <targetUrl>https://nexus.cenotelie.fr/repository/raw/p2/xowl-satellite/${project.version}/</targetUrl>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>upload</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>upload-p2</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

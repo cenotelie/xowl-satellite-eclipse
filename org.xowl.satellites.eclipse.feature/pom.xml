@@ -14,7 +14,7 @@
         <dependency>
             <groupId>fr.cenotelie.hime</groupId>
             <artifactId>hime-language-server</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -44,16 +44,12 @@
                 <version>1.0.0</version>
                 <configuration>
                     <excludes>
-                        <plugin id="fr.cenotelie.hime.redist"/>
-                        <plugin id="fr.cenotelie.commons.utils"/>
-                        <plugin id="fr.cenotelie.commons.jsonrpc"/>
-                        <plugin id="fr.cenotelie.commons.lsp"/>
+                        <feature id="fr.cenotelie.commons.feature"/>
                         <plugin id="org.xowl.infra.xowl-lang"/>
                         <plugin id="org.xowl.infra.xowl-store"/>
                         <plugin id="org.xowl.infra.xowl-denotation"/>
                         <plugin id="org.xowl.infra.xowl-server-api"/>
                         <plugin id="org.xowl.platform.xowl-kernel"/>
-                        <feature id="fr.cenotelie.commons.feature"/>
                     </excludes>
                 </configuration>
                 <executions>

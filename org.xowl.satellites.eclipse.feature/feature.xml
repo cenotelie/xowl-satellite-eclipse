@@ -181,7 +181,9 @@
         Library.
     </license>
 
-    <includes id="fr.cenotelie.commons.feature" version="1.0.0"/>
+    <requires>
+        <import feature="fr.cenotelie.commons.feature" version="2.0.1"/>
+    </requires>
 
     <plugin
             id="org.xowl.infra.xowl-lang"
