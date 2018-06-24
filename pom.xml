@@ -48,7 +48,7 @@
         <repository>
             <id>ep</id>
             <layout>p2</layout>
-            <url>${eclipseSite}/eclipse/updates/4.6/R-4.6.3-201703010400/</url>
+            <url>${eclipseSite}/eclipse/updates/4.7/R-4.7.3a-201803300640/</url>
         </repository>
         <repository>
             <id>gef</id>
@@ -58,7 +58,7 @@
         <repository>
             <id>emf-emf</id>
             <layout>p2</layout>
-            <url>${eclipseSite}/modeling/emf/emf/updates/2.12/</url>
+            <url>${eclipseSite}/modeling/emf/emf/updates/2.13/</url>
         </repository>
         <repository>
             <id>emf-transaction</id>
