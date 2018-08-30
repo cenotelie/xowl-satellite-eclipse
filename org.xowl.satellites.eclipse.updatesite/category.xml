@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-	<feature id="fr.cenotelie.commons.feature" url="features/fr.cenotelie.commons.feature_2.0.1.jar" version="2.0.1">
+	<feature id="fr.cenotelie.commons.feature" url="features/fr.cenotelie.commons.feature_2.1.0.jar" version="2.1.0">
 		<category name="fr.cenotelie.commons.category"/>
 	</feature>
 	<feature id="org.xowl.satellites.eclipse.feature" url="features/org.xowl.satellites.eclipse.feature_0.1.0.qualifier.jar" version="0.1.0.qualifier">
