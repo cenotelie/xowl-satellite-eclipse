@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               label="Pull From Collaboration">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <test
+                        forcePluginActivation="true"
+                        property="org.xowl.satellites.papyrus.properties.isPackage"
+                        value="true">
+                  </test>
+               </with>
+            </visibleWhen>
+            <dynamic
+                  class="org.xowl.satellites.papyrus.PapyrusPullMenu"
+                  id="org.xowl.satellites.papyrus.dynamic.pull">
+            </dynamic>
+         </menu>
+         <menu
+               label="xOWL Extra">
+            <command
+                  commandId="org.xowl.satellites.papyrus.commands.showClassName"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="org.xowl.satellites.papyrus.PapyrusPropertyTester"
+            id="org.xowl.satellites.papyrus.properties.propertyTester"
+            namespace="org.xowl.satellites.papyrus.properties"
+            properties="isModel, isPackage, isClass"
+            type="org.eclipse.jface.viewers.IStructuredSelection">
+      </propertyTester>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.xowl.satellites.papyrus.PullRequirementsHandler"
+            id="org.xowl.satellites.papyrus.commands.requirements.pull"
+            name="Pull Requirements">
+      </command>
+      <command
+            defaultHandler="org.xowl.satellites.papyrus.ShowClassNameHandler"
+            id="org.xowl.satellites.papyrus.commands.showClassName"
+            name="Show Class Name">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.xowl.satellites.papyrus.PullRequirementsHandler"
+            commandId="org.xowl.satellites.papyrus.commands.requirements.pull">
+      </handler>
+      <handler
+            class="org.xowl.satellites.papyrus.ShowClassNameHandler"
+            commandId="org.xowl.satellites.papyrus.commands.showClassName">
+      </handler>
+   </extension>
+
+</plugin>

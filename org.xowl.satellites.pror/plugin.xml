@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               label="Push to Collaboration">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <test
+                        forcePluginActivation="true"
+                        property="org.xowl.satellites.pror.properties.isReqif"
+                        value="true">
+                  </test>
+               </with>
+            </visibleWhen>
+            <dynamic
+                  class="org.xowl.satellites.pror.ProrPushMenu"
+                  id="org.xowl.satellites.pror.dynamic.pull">
+            </dynamic>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="org.xowl.satellites.pror.ProrPropertyTester"
+            id="org.xowl.satellites.pror.properties.propertyTester"
+            namespace="org.xowl.satellites.pror.properties"
+            properties="isReqif"
+            type="org.eclipse.jface.viewers.IStructuredSelection">
+      </propertyTester>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.xowl.satellites.pror.PushRequirementsHandler"
+            id="org.xowl.satellites.pror.commands.requirements.push"
+            name="Push Requirements">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.xowl.satellites.pror.PushRequirementsHandler"
+            commandId="org.xowl.satellites.pror.commands.requirements.push">
+      </handler>
+   </extension>
+
+</plugin>
