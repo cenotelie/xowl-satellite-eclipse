@@ -3,18 +3,24 @@ package org.xowl.satellites.pror;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.internal.resources.File;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.gmt.modisco.infra.browser.uicore.internal.model.ModelElementItem;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.rmf.reqif10.AttributeValue;
 import org.eclipse.rmf.reqif10.AttributeValueString;
 import org.eclipse.rmf.reqif10.ReqIF;
 import org.eclipse.rmf.reqif10.SpecObject;
+import org.eclipse.rmf.reqif10.serialization.ReqIF10ResourceFactoryImpl;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.PlatformUI;
 import org.xowl.platform.kernel.remote.PlatformApiDeserializerForOSGi;
@@ -24,6 +30,7 @@ import fr.cenotelie.commons.utils.api.Reply;
 import fr.cenotelie.commons.utils.http.HttpConstants;
 import fr.cenotelie.commons.utils.http.URIUtils;
 
+@SuppressWarnings("restriction")
 public class PushRequirementsHandler extends AbstractHandler {
 
 	@SuppressWarnings("deprecation")
@@ -33,10 +40,10 @@ public class PushRequirementsHandler extends AbstractHandler {
 		ISelectionService selectionService = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService();
 		ISelection selection = selectionService.getSelection();
 		Object o = ((IStructuredSelection)selection).getFirstElement();
-		if (!(o instanceof ModelElementItem)) {
+		if (!(o instanceof File)) {
 			return null;
 		}
-		ReqIF reqif = (ReqIF) ((ModelElementItem)o).getEObject();
+		ReqIF reqif = loadFromFile((File)o);
 		List<Requirement> requirements = generateRequirements(reqif);
 		String artifactName, artifactBase, artifactVersion, artifactArchetype;
 		artifactName = "ProR Base";
@@ -59,6 +66,17 @@ public class PushRequirementsHandler extends AbstractHandler {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	private ReqIF loadFromFile(File file) {
+		//ReqIF10Package.eINSTANCE.eClass();
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+        Map<String, Object> m = reg.getExtensionToFactoryMap();
+        m.put("reqif", new ReqIF10ResourceFactoryImpl());
+        ResourceSet resSet = new ResourceSetImpl();
+        String path = file.getLocation().toString();
+        Resource resource = resSet.getResource(URI.createFileURI(path), true);
+		return (ReqIF) resource.getContents().get(0);
 	}
 	
 	private List<Requirement> generateRequirements(ReqIF reqif) {

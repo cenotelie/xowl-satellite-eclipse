@@ -4,18 +4,14 @@ Bundle-Name: Papyrus
 Bundle-SymbolicName: org.xowl.satellites.papyrus;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.xowl.satellites.papyrus.Activator
-Bundle-Vendor: CÃ©notÃ©lie
+Bundle-Vendor: Cénotélie
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
  org.eclipse.core.expressions,
  org.eclipse.emf.transaction;bundle-version="1.9.0",
- org.eclipse.emf.facet.custom.metamodel;bundle-version="1.2.2",
  org.eclipse.uml2.uml;bundle-version="5.3.0",
  org.apache.httpcomponents.httpclient;bundle-version="4.5.2",
  fr.cenotelie.commons.utils;bundle-version="2.1.0",
- org.xowl.platform.xowl-kernel;bundle-version="0.3.1",
- org.eclipse.core.resources,
- org.eclipse.osgi
+ org.xowl.platform.xowl-kernel;bundle-version="0.3.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.papyrus.emf.facet.custom.metamodel.v0_2_0.internal.treeproxy
