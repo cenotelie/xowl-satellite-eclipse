@@ -60,7 +60,7 @@ public class PushRequirementsHandler extends AbstractHandler {
                             + URIUtils.encodeComponent(artifactBase) + "&version="
                             + URIUtils.encodeComponent(artifactVersion) + "&archetype="
                             + URIUtils.encodeComponent(artifactArchetype),
-                    "POST", generateJSONContent(requirements).getBytes(), "JSON", false, HttpConstants.MIME_JSON);
+                    "POST", generateJSONContent(requirements).getBytes(), "application/json", false, HttpConstants.MIME_JSON);
 			System.out.println(reply.getMessage());
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -95,6 +95,8 @@ public class PushRequirementsHandler extends AbstractHandler {
 	
 	private String generateJSONContent(List<Requirement> requirements) {
 		StringBuilder sb = new StringBuilder();
+		sb.append("{ \"graph\": \"sys:req\", ");
+		sb.append("\"entities\": ");
 		sb.append("[");
 		Iterator<Requirement> it = requirements.iterator();
 		Requirement req;
@@ -106,7 +108,8 @@ public class PushRequirementsHandler extends AbstractHandler {
 			}
 			sb.append("\n");
 		}
-		sb.append("]");
+		sb.append("]}");
+		System.out.println(sb.toString());
 		return sb.toString();
 	}
 	

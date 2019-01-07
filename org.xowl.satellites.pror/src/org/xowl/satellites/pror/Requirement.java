@@ -44,10 +44,18 @@ public class Requirement {
 	public String toJSON() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{");
-		sb.append("\"id\":\"" + this.id + "\", ");
-		sb.append("\"name\":\"" + this.name + "\", ");
-		sb.append("\"description\":\"" + this.description + "\"");
-		sb.append("}");
+		sb.append("\"subject\":");
+		sb.append("\"sys:" + this.id + "\", \"properties\": [");
+		sb.append("{\"property\": \"sys:identifier\", \"values\": [");
+		sb.append("\"" + this.id + "\"");
+		sb.append("]},");
+		sb.append("{\"property\": \"sys:name\", \"values\": [");
+		sb.append("\"" + this.name + "\"");
+		sb.append("]},");
+		sb.append("{\"property\": \"sys:description\", \"values\": [");
+		sb.append("\"" + this.description + "\"");
+		sb.append("]}");
+		sb.append("]}");
 		return sb.toString();
 	}
 
