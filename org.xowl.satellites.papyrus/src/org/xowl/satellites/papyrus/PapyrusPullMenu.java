@@ -20,6 +20,10 @@ import org.eclipse.ui.services.IServiceLocator;
 public class PapyrusPullMenu extends ContributionItem {
 	
 	public static final String PULL_REQUIREMENTS_COMMAND = "org.xowl.satellites.papyrus.commands.requirements.pull";
+	public static final String PULL_STATEMACHINES_COMMAND = "org.xowl.satellites.papyrus.commands.statemachines.pull";
+	
+	private ICommandService commandService = (ICommandService)((IServiceLocator)PlatformUI.getWorkbench()).getService(ICommandService.class);
+	private IHandlerService handlerService = (IHandlerService)((IServiceLocator)PlatformUI.getWorkbench()).getService(IHandlerService.class);
 
 	@Override
 	public void fill(Menu menu, int index) {
@@ -29,11 +33,26 @@ public class PapyrusPullMenu extends ContributionItem {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				ICommandService commandService = (ICommandService)((IServiceLocator)PlatformUI.getWorkbench()).getService(ICommandService.class);
-				IHandlerService handlerService = (IHandlerService)((IServiceLocator)PlatformUI.getWorkbench()).getService(IHandlerService.class);
 				Command command = commandService.getCommand(PULL_REQUIREMENTS_COMMAND);
 				ParameterizedCommand pcommand = new ParameterizedCommand(command, null);
 				handlerService.activateHandler(PULL_REQUIREMENTS_COMMAND, new PullRequirementsHandler());
+				try {
+					handlerService.executeCommand(pcommand, null);
+				} catch (ExecutionException | NotDefinedException | NotEnabledException | NotHandledException ex) {
+					ex.printStackTrace();
+				}
+			}
+			
+		});
+		item = new MenuItem(menu, SWT.CHECK, index);
+		item.setText("State Machines Baseline");
+		item.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Command command = commandService.getCommand(PULL_STATEMACHINES_COMMAND);
+				ParameterizedCommand pcommand = new ParameterizedCommand(command, null);
+				handlerService.activateHandler(PULL_STATEMACHINES_COMMAND, new PullStateMachinesHandler());
 				try {
 					handlerService.executeCommand(pcommand, null);
 				} catch (ExecutionException | NotDefinedException | NotEnabledException | NotHandledException ex) {

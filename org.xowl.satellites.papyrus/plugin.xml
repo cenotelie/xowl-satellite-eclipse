@@ -55,6 +55,11 @@
             id="org.xowl.satellites.papyrus.commands.showClassName"
             name="Show Class Name">
       </command>
+      <command
+            defaultHandler="org.xowl.satellites.papyrus.PullStateMachinesHandler"
+            id="org.xowl.satellites.papyrus.commands.statemachines.pull"
+            name="Pull State Machines">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -65,6 +70,10 @@
       <handler
             class="org.xowl.satellites.papyrus.ShowClassNameHandler"
             commandId="org.xowl.satellites.papyrus.commands.showClassName">
+      </handler>
+      <handler
+            class="org.xowl.satellites.papyrus.PullStateMachinesHandler"
+            commandId="org.xowl.satellites.papyrus.commands.statemachines.pull">
       </handler>
    </extension>
 

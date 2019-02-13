@@ -1,5 +1,8 @@
 package org.xowl.satellites.pror;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -32,6 +35,8 @@ import fr.cenotelie.commons.utils.http.URIUtils;
 
 @SuppressWarnings("restriction")
 public class PushRequirementsHandler extends AbstractHandler {
+	
+	private List<String> reqids = new ArrayList<>();
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -48,7 +53,7 @@ public class PushRequirementsHandler extends AbstractHandler {
 		String artifactName, artifactBase, artifactVersion, artifactArchetype;
 		artifactName = "ProR Base";
 		artifactBase = "http://xowl.org/platform/kernel/Artifact#4b6ebc1f-f6a0-4a07-bb6a-ed42989cabe1";
-		artifactVersion = "v1.1";
+		artifactVersion = "v1.2";
 		artifactArchetype = "com.holonshub.marketplace.domains.syseng.SysEngArchetypeRequirements";
 		try(RemotePlatformAccess connection = new RemotePlatformAccess(u, new PlatformApiDeserializerForOSGi())) {
 			Reply reply = connection.login("admin", "admin");
@@ -83,11 +88,24 @@ public class PushRequirementsHandler extends AbstractHandler {
 		EList<SpecObject> reqs = reqif.getCoreContent().getSpecObjects();
 		List<Requirement> requirements = new ArrayList<Requirement>();
 		for (SpecObject so: reqs) {
-			Requirement req = new Requirement();
-			req.setName(so.getIdentifier());
 			EList<AttributeValue> values = so.getValues();
-			req.setDescription(((AttributeValueString)values.get(0)).getTheValue());
-			req.setId(((AttributeValueString)values.get(1)).getTheValue());
+			if (values.size() < 2) continue;
+			String val1, val2;
+			val1 = ((AttributeValueString)values.get(0)).getTheValue();
+			val2 = ((AttributeValueString)values.get(1)).getTheValue();
+			if ("".equals(val1) || "".equals(val2)) continue;
+			//Strange bug ! We need to switch values sometimes
+			if (val2.startsWith("O")) {
+				String tmp = val1;
+				val1 = val2;
+				val2 = tmp;
+			}
+			if (reqids.indexOf(val1) >= 0) {
+				continue;
+			}
+			Requirement req = new Requirement();
+			req.setId(val1);
+			req.setDescription(val2);
 			requirements.add(req);
 		}
 		return requirements;
@@ -95,7 +113,7 @@ public class PushRequirementsHandler extends AbstractHandler {
 	
 	private String generateJSONContent(List<Requirement> requirements) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("{ \"graph\": \"sys:req\", ");
+		sb.append("{ \"graph\": \"opreq\", ");
 		sb.append("\"entities\": ");
 		sb.append("[");
 		Iterator<Requirement> it = requirements.iterator();
@@ -104,12 +122,19 @@ public class PushRequirementsHandler extends AbstractHandler {
 			req = it.next();
 			sb.append(req.toJSON());
 			if (it.hasNext()) {
-				sb.append(",");
+				sb.append(",\n");
 			}
 			sb.append("\n");
 		}
 		sb.append("]}");
 		System.out.println(sb.toString());
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("/tmp/reqs.json", false));
+			bw.write(sb.toString());
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return sb.toString();
 	}
 	

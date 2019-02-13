@@ -1,16 +1,15 @@
 package org.xowl.satellites.papyrus;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
-import org.eclipse.emf.transaction.RollbackException;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.viewers.ISelection;
@@ -18,13 +17,11 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.papyrus.emf.facet.custom.metamodel.v0_2_0.internal.treeproxy.EObjectTreeElement;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.uml2.common.util.UML2Util;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Stereotype;
 import org.eclipse.uml2.uml.UMLFactory;
-import org.eclipse.uml2.uml.util.UMLUtil;
 import org.xowl.platform.kernel.remote.PlatformApiDeserializerForOSGi;
 import org.xowl.platform.kernel.remote.RemotePlatformAccess;
 
@@ -34,9 +31,12 @@ import fr.cenotelie.commons.utils.json.SerializedUnknown;
 
 @SuppressWarnings("restriction")
 public class PullRequirementsHandler extends AbstractHandler {
+	
+	private HashMap<String, Class> requirements = Activator.getDefault().getRequirements();
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		requirements.clear();
 		ISelectionService selectionService = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService();
 		ISelection selection = selectionService.getSelection();
 		Object o = ((IStructuredSelection)selection).getFirstElement();
@@ -89,11 +89,13 @@ public class PullRequirementsHandler extends AbstractHandler {
 	private void createRequirement(Package parent, SerializedUnknown serialized, Stereotype stereo) {
 		Class req = UMLFactory.eINSTANCE.createClass();
 		parent.getPackagedElements().add(req);
+		String id = "" + serialized.getValueFor("id");
 		req.setName("REQ_" + serialized.getValueFor("id"));
 		req.applyStereotype(stereo);
 		Stereotype appliedStereotype = req.getAppliedStereotypes().get(0);
-		req.setValue(appliedStereotype, "id", serialized.getValueFor("name"));
+		req.setValue(appliedStereotype, "id", id);
 		req.setValue(appliedStereotype, "text", serialized.getValueFor("description"));
+		requirements.put(id, req);
 	}
 	
 	private Profile loadSysmlProfile() {
